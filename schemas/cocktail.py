@@ -1,6 +1,6 @@
 from datetime import datetime
 from pydantic import BaseModel
-from .ingredient import IngredientCreate, IngredientRead
+from ingredient import IngredientCreate, IngredientRead
 
 class CocktailCreate(BaseModel):
     name: str

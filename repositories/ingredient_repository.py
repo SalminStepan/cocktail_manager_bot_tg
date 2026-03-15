@@ -1,4 +1,4 @@
-from ..schemas.ingredient import IngredientCreate
+from schemas.ingredient import IngredientCreate
 
 #create ingredient into db
 def create_ingredients(conn, cocktail_id: int, ingredients: list[IngredientCreate]) -> None:

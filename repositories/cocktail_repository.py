@@ -1,5 +1,6 @@
 from schemas.cocktail import CocktailCreate
 
+
 #create cocktail db
 def create_cocktail(conn, cocktail: CocktailCreate) ->int:
     with conn.cursor() as cur:

@@ -3,12 +3,14 @@ from config import BOT_TOKEN
 import asyncio
 from handlers.start import start_router
 from handlers.add_test import add_router
+from handlers.get_all import list_router
 
 async def main():
     bot = Bot(token=BOT_TOKEN)
     dp = Dispatcher()
     dp.include_router(start_router)
     dp.include_router(add_router)
+    dp.include_router(list_router)
     await dp.start_polling(bot)
 
 if __name__ == "__main__":

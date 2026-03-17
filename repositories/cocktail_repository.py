@@ -8,3 +8,9 @@ def create_cocktail(conn, cocktail: CocktailCreate) ->int:
         (cocktail.name, cocktail.glass, cocktail.garnish, cocktail.method))
         row = cur.fetchone()
     return row["id"]
+
+def get_all_cocktails_names(conn) -> list:
+    with conn.cursor() as cur:
+        cur.execute("SELECT name FROM cocktails ORDER BY id LIMIT 20;")
+        result = cur.fetchall()
+        return result

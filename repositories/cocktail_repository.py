@@ -14,3 +14,9 @@ def get_all_cocktails_names(conn) -> list:
         cur.execute("SELECT name FROM cocktails ORDER BY id LIMIT 20;")
         result = cur.fetchall()
         return result
+
+def get_cocktail_by_name(conn, name) -> dict | None:
+    with conn.cursor() as cur:
+        cur.execute("SELECT id, name, glass, garnish, method, created_at FROM cocktails WHERE name = %s;", (name,))
+        result = cur.fetchone()
+        return result

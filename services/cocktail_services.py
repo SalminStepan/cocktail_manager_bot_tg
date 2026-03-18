@@ -1,7 +1,8 @@
 from db.connection import get_connection
-from repositories.cocktail_repository import create_cocktail, get_all_cocktails_names
-from repositories.ingredient_repository import create_ingredients
-from schemas.cocktail import CocktailCreate
+from repositories.cocktail_repository import create_cocktail, get_all_cocktails_names, get_cocktail_by_name
+from repositories.ingredient_repository import create_ingredients, get_ingredients_by_cocktail_id
+from schemas.cocktail import CocktailCreate, CocktailRead
+from schemas.ingredient import IngredientRead
 
 
 # Create cocktail with ingredients in single transaction
@@ -16,3 +17,25 @@ def list_cocktails():
     with get_connection() as conn:
         cocktails = get_all_cocktails_names(conn)
         return cocktails
+    
+def get_full_cocktail_by_name(name) -> CocktailRead | None:
+    with get_connection() as conn:
+        cocktail = get_cocktail_by_name(conn, name)
+        if not cocktail:
+            return None
+        cocktail_id = cocktail["id"]
+        ingredients = get_ingredients_by_cocktail_id(conn, cocktail_id)
+        ingredients_models = [
+            IngredientRead(**ingredient)
+            for ingredient in ingredients
+        ]
+        cocktail_model = CocktailRead(
+            id=cocktail["id"],
+            name=cocktail["name"],
+            glass=cocktail["glass"],
+            garnish=cocktail["garnish"],
+            method=cocktail["method"],
+            created_at=cocktail["created_at"],
+            ingredients=ingredients_models
+        )
+        return cocktail_model

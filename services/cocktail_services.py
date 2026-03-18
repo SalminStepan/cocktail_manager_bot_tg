@@ -1,5 +1,5 @@
 from db.connection import get_connection
-from repositories.cocktail_repository import create_cocktail, get_all_cocktails_names, get_cocktail_by_name
+from repositories.cocktail_repository import create_cocktail, get_all_cocktails_names, get_cocktail_by_name, search_cocktails
 from repositories.ingredient_repository import create_ingredients, get_ingredients_by_cocktail_id
 from schemas.cocktail import CocktailCreate, CocktailRead
 from schemas.ingredient import IngredientRead
@@ -39,3 +39,8 @@ def get_full_cocktail_by_name(name) -> CocktailRead | None:
             ingredients=ingredients_models
         )
         return cocktail_model
+    
+def search_by_query(query) -> list[dict]:
+    with get_connection() as conn:
+        cocktails = search_cocktails(conn, query)
+        return cocktails

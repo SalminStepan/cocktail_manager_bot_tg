@@ -11,7 +11,7 @@ async def list_handler(message:types.Message):
         await message.answer("Cocktail list empty")
     else:
         lines = ["🍸 Cocktails",""]
-        for i, cocktail in enumerate(cocktails):
-            lines.append(f'{i+1}. {cocktail["name"]}')
+        for i, cocktail in enumerate(cocktails, start=1):
+            lines.append(f'{i}. {cocktail["name"]}')
         text = "\n".join(lines)
         await message.answer(text)

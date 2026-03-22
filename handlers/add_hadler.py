@@ -1,0 +1,83 @@
+from aiogram import Router, types
+from aiogram.filters.command import Command
+from schemas.cocktail import CocktailCreate
+from aiogram.fsm.context import FSMContext
+from aiogram.fsm.state import StatesGroup, State
+from services.cocktail_services import create_cocktail_with_ingredients
+
+add_cocktail_router = Router()
+
+class AddCocktail(StatesGroup):
+    name = State()
+    glass = State()
+    garnish = State()
+    method = State()
+    ingredient = State()
+# add
+@add_cocktail_router.message(Command("add"))
+async def add_cocktail_handler(message:types.Message, state:FSMContext):
+    await state.clear()
+    await message.answer("Enter cocktail name")
+    await state.set_state(AddCocktail.name)
+# name
+@add_cocktail_router.message(AddCocktail.name)
+async def name_handler(message:types.Message, state:FSMContext):
+    await state.update_data(name=message.text)
+    await message.answer("Enter glass")
+    await state.set_state(AddCocktail.glass)
+# glass
+@add_cocktail_router.message(AddCocktail.glass)
+async def glass_handler(message:types.Message, state:FSMContext):
+    await state.update_data(glass=message.text)
+    await message.answer("Enter garnish")
+    await state.set_state(AddCocktail.garnish)
+# garnish
+@add_cocktail_router.message(AddCocktail.garnish)
+async def garnish_handler(message:types.Message, state:FSMContext):
+    await state.update_data(garnish=message.text)
+    await message.answer("Enter method")
+    await state.set_state(AddCocktail.method)
+# method
+@add_cocktail_router.message(AddCocktail.method)
+async def method_handler(message: types.Message, state: FSMContext):
+    await state.update_data(method=message.text)
+    await state.update_data(ingredients = [])
+    await message.answer("""
+        Enter ingredient in format: name amount_ml
+        Example: Gin 30
+        Send /done when finished""")
+    await state.set_state(AddCocktail.ingredient)
+# done
+@add_cocktail_router.message(Command("done"), AddCocktail.ingredient)
+async def done_handler(message:types.Message, state:FSMContext):
+    data = await state.get_data()
+    ingredients_data = data.get("ingredients", [])
+    if not ingredients_data:
+        return await message.answer("Cocktail cannot be created without ingredients")
+    cocktail = CocktailCreate(**data)
+    cocktail_id = create_cocktail_with_ingredients(cocktail)
+    await message.answer(f"Cocktail created with id: {cocktail_id}")
+    await state.clear()
+# intgredients
+@add_cocktail_router.message(AddCocktail.ingredient)
+async def ingredient_handler(message:types.Message, state:FSMContext):
+        if message.text.startswith("/"):
+            return
+        parts = message.text.split()
+        if len(parts) < 2:
+            return await message.answer("Invalid format. Example: Gin 30")
+        name =" ".join(parts[:-1])
+        try:
+            amount_ml = int(parts[-1])
+            if amount_ml <= 0:
+                return await message.answer("Amount must be greater than 0")
+        except ValueError:
+            return await message.answer("Amount must be an integer")
+        data = await state.get_data()
+        ingredients = data.get("ingredients", [])
+        ingredients.append({"name":name, "amount_ml": amount_ml})
+        await state.update_data(ingredients=ingredients)
+        await message.answer(f"""
+            Ingredient added: {name} {amount_ml} ml
+            Send next ingredient or /done""")
+

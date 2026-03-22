@@ -2,6 +2,7 @@ from datetime import datetime
 from pydantic import BaseModel
 from schemas.ingredient import IngredientCreate, IngredientRead
 
+
 class CocktailCreate(BaseModel):
     name: str
     glass: str

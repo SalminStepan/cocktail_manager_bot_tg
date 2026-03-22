@@ -6,6 +6,7 @@ from handlers.add_test import add_router
 from handlers.get_all import list_router
 from handlers.get_cocktail_by_name import get_cocktail_router
 from handlers.search import search_router
+from handlers.add_hadler import add_cocktail_router
 
 async def main():
     bot = Bot(token=BOT_TOKEN)
@@ -15,6 +16,7 @@ async def main():
     dp.include_router(list_router)
     dp.include_router(get_cocktail_router)
     dp.include_router(search_router)
+    dp.include_router(add_cocktail_router)
 
     await dp.start_polling(bot)
 

@@ -8,6 +8,7 @@ from handlers.get_cocktail_by_name_handler import get_cocktail_router
 from handlers.search_handler import search_router
 from handlers.add_hadler import add_cocktail_router
 from handlers.delete_handler import delete_router
+from handlers.help_handler import help_router
 
 async def main():
     bot = Bot(token=BOT_TOKEN)
@@ -19,6 +20,7 @@ async def main():
     dp.include_router(search_router)
     dp.include_router(add_cocktail_router)
     dp.include_router(delete_router)
+    dp.include_router(help_router)
     await dp.start_polling(bot)
 
 if __name__ == "__main__":

@@ -32,3 +32,11 @@ def search_cocktails(conn, query) -> list[dict]:
             ORDER BY c.id;
         """, (f"%{query}%", f"%{query}%"))
         return cur.fetchall()
+    
+def delete_cocktail(conn, name) -> int | None:
+    with conn.cursor() as cur:
+        cur.execute("DELETE FROM cocktails WHERE name = %s RETURNING id", (name,))
+        row = cur.fetchone()
+    if row:
+        return row["id"]
+    return None

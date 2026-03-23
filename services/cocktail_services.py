@@ -1,5 +1,5 @@
 from db.connection import get_connection
-from repositories.cocktail_repository import create_cocktail, get_all_cocktails_names, get_cocktail_by_name, search_cocktails
+from repositories.cocktail_repository import create_cocktail, get_all_cocktails_names, get_cocktail_by_name, search_cocktails, delete_cocktail
 from repositories.ingredient_repository import create_ingredients, get_ingredients_by_cocktail_id
 from schemas.cocktail import CocktailCreate, CocktailRead
 from schemas.ingredient import IngredientRead
@@ -44,3 +44,9 @@ def search_by_query(query) -> list[dict]:
     with get_connection() as conn:
         cocktails = search_cocktails(conn, query)
         return cocktails
+    
+def delete_cocktail_by_name(name) -> int | None:
+    with get_connection() as conn:
+        cocktail_id = delete_cocktail(conn, name)
+        conn.commit()
+        return cocktail_id

@@ -11,6 +11,7 @@ async def start_handler(message: types.Message):
         🍸 Commands:
 
         /add — create a new cocktail (step-by-step)
+        /cancel - stop creating a new cocktail
         /list — show cocktail list
         /cocktail <name> — show full recipe
         /search <query> — search cocktails

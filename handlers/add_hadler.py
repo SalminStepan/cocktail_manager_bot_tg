@@ -19,6 +19,15 @@ async def add_cocktail_handler(message:types.Message, state:FSMContext):
     await state.clear()
     await message.answer("Enter cocktail name")
     await state.set_state(AddCocktail.name)
+# cancel
+@add_cocktail_router.message(Command("cancel"))
+async def cancel_handler(message:types.Message, state:FSMContext):
+    state_now = await state.get_state()
+    if state_now is None:
+        await message.answer("Nothing to cancel")
+    else:
+        await state.clear()
+        await message.answer("Operation canceled")
 # name
 @add_cocktail_router.message(AddCocktail.name)
 async def name_handler(message:types.Message, state:FSMContext):
@@ -45,7 +54,8 @@ async def method_handler(message: types.Message, state: FSMContext):
     await message.answer("""
         Enter ingredient in format: name amount_ml
         Example: Gin 30
-        Send /done when finished""")
+        Send /done when finished
+        Send /cancel to cancel operation""")
     await state.set_state(AddCocktail.ingredient)
 # done
 @add_cocktail_router.message(Command("done"), AddCocktail.ingredient)
@@ -79,5 +89,5 @@ async def ingredient_handler(message:types.Message, state:FSMContext):
         await state.update_data(ingredients=ingredients)
         await message.answer(f"""
             Ingredient added: {name} {amount_ml} ml
-            Send next ingredient or /done""")
-
+            Send next ingredient or /done
+            Send /cancel to cancel operation""")

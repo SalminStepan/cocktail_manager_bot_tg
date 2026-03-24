@@ -17,16 +17,13 @@ async def cocktail_handler(message:types.Message):
             await message.answer("Cocktail not found")
             return
         lines = [f"🍸 {cocktail.name}",""]
+        lines.append(f"Glass: {cocktail.glass}")
+        lines.append(f"Method: {cocktail.method}")
+        lines.append(f"Garnish: {cocktail.garnish}")
+        lines.append("")
         lines.append(f"Ingredients:")
-        lines.append("")
         for ingredient in cocktail.ingredients:
-            lines.append(f"{ingredient.name} - {ingredient.amount_ml} ml")
-        lines.append("")
-        lines.append(f"• Glass: {cocktail.glass}")
-        lines.append("")
-        lines.append(f"• Method: {cocktail.method}")
-        lines.append("")
-        lines.append(f"• Garnish: {cocktail.garnish}")
+            lines.append(f"- {ingredient.name} — {ingredient.amount_ml} ml")
 
         text = "\n".join(lines)
         await message.answer(text)

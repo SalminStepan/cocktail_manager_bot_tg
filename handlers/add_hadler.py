@@ -27,7 +27,7 @@ async def cancel_handler(message:types.Message, state:FSMContext):
         await message.answer("Nothing to cancel")
     else:
         await state.clear()
-        await message.answer("Operation canceled")
+        await message.answer("Operation cancelled")
 # name
 @add_cocktail_router.message(AddCocktail.name)
 async def name_handler(message:types.Message, state:FSMContext):

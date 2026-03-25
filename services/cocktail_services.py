@@ -13,9 +13,13 @@ def create_cocktail_with_ingredients(cocktail: CocktailCreate) -> int:
         conn.commit()
         return cocktail_id
 
-def list_cocktails():
+def list_cocktails(page: int = 1) ->list[dict]:
     with get_connection() as conn:
-        cocktails = get_all_cocktails_names(conn)
+        if page<1:
+            page = 1
+        limit = 20
+        offset = (page - 1)*limit
+        cocktails = get_all_cocktails_names(conn, limit, offset)
         return cocktails
     
 def get_full_cocktail_by_name(name) -> CocktailRead | None:

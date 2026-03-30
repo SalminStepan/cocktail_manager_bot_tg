@@ -2,11 +2,11 @@ from aiogram import Bot, Dispatcher
 from config import BOT_TOKEN
 import asyncio
 from handlers.start_handler import start_router
-from handlers.add_test import add_router
-from handlers.get_all_handler import list_router
-from handlers.get_cocktail_by_name_handler import get_cocktail_router
+from tests.add_test_handler import add_router
+from handlers.list_handler import list_router
+from handlers.cocktail_handler import get_cocktail_router
 from handlers.search_handler import search_router
-from handlers.add_hadler import add_cocktail_router
+from handlers.add_handler import add_cocktail_router
 from handlers.delete_handler import delete_router
 from handlers.help_handler import help_router
 

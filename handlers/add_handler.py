@@ -4,6 +4,7 @@ from schemas.cocktail import CocktailCreate
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
 from services.cocktail_services import create_cocktail_with_ingredients
+from config import ADMIN_IDS
 
 add_cocktail_router = Router()
 
@@ -12,10 +13,13 @@ class AddCocktail(StatesGroup):
     glass = State()
     garnish = State()
     method = State()
-    ingredient = State()
+    ingredients = State()
 # add
 @add_cocktail_router.message(Command("add"))
 async def add_cocktail_handler(message:types.Message, state:FSMContext):
+    if message.from_user.id not in ADMIN_IDS:
+        await message.answer("Access denied")
+        return
     await state.clear()
     await message.answer("Enter cocktail name")
     await state.set_state(AddCocktail.name)
@@ -52,42 +56,46 @@ async def method_handler(message: types.Message, state: FSMContext):
     await state.update_data(method=message.text)
     await state.update_data(ingredients = [])
     await message.answer("""
-        Enter ingredient in format: name amount_ml
-        Example: Gin 30
-        Send /done when finished
-        Send /cancel to cancel operation""")
-    await state.set_state(AddCocktail.ingredient)
+Enter ingredient in format: name amount_ml
+Example: Gin 30
+Send /done when finished
+Send /cancel to cancel operation""")
+    await state.set_state(AddCocktail.ingredients)
 # done
-@add_cocktail_router.message(Command("done"), AddCocktail.ingredient)
+@add_cocktail_router.message(Command("done"), AddCocktail.ingredients)
 async def done_handler(message:types.Message, state:FSMContext):
     data = await state.get_data()
     ingredients_data = data.get("ingredients", [])
     if not ingredients_data:
         return await message.answer("Cocktail cannot be created without ingredients")
-    cocktail = CocktailCreate(**data)
-    cocktail_id = create_cocktail_with_ingredients(cocktail)
+    try:
+        cocktail = CocktailCreate(**data)
+        cocktail_id = create_cocktail_with_ingredients(cocktail)
+    except Exception:
+        await state.clear()
+        return await message.answer("Cocktail creation failed")
     await message.answer(f"Cocktail created with id: {cocktail_id}")
     await state.clear()
-# intgredients
-@add_cocktail_router.message(AddCocktail.ingredient)
+# ingredients
+@add_cocktail_router.message(AddCocktail.ingredients)
 async def ingredient_handler(message:types.Message, state:FSMContext):
-        if message.text.startswith("/"):
-            return
-        parts = message.text.split()
-        if len(parts) < 2:
-            return await message.answer("Invalid format. Example: Gin 30")
-        name =" ".join(parts[:-1])
-        try:
-            amount_ml = int(parts[-1])
-            if amount_ml <= 0:
-                return await message.answer("Amount must be greater than 0")
-        except ValueError:
-            return await message.answer("Amount must be an integer")
-        data = await state.get_data()
-        ingredients = data.get("ingredients", [])
-        ingredients.append({"name":name, "amount_ml": amount_ml})
-        await state.update_data(ingredients=ingredients)
-        await message.answer(f"""
-            Ingredient added: {name} {amount_ml} ml
-            Send next ingredient or /done
-            Send /cancel to cancel operation""")
+    if message.text.startswith("/"):
+        return
+    parts = message.text.split()
+    if len(parts) < 2:
+        return await message.answer("Invalid format. Example: Gin 30")
+    name =" ".join(parts[:-1])
+    try:
+        amount_ml = int(parts[-1])
+        if amount_ml <= 0:
+            return await message.answer("Amount must be greater than 0")
+    except ValueError:
+        return await message.answer("Amount must be an integer")
+    data = await state.get_data()
+    ingredients = data.get("ingredients", [])
+    ingredients.append({"name":name, "amount_ml": amount_ml})
+    await state.update_data(ingredients=ingredients)
+    await message.answer(f"""
+Ingredient added: {name} {amount_ml} ml
+Send next ingredient or /done
+Send /cancel to cancel operation""")

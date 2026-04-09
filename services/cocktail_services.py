@@ -15,14 +15,14 @@ def create_cocktail_with_ingredients(cocktail: CocktailCreate) -> int:
 
 def list_cocktails(page: int = 1) ->list[dict]:
     with get_connection() as conn:
-        if page<1:
+        if page < 1:
             page = 1
         limit = 20
-        offset = (page - 1)*limit
+        offset = (page - 1) * limit
         cocktails = get_all_cocktails_names(conn, limit, offset)
         return cocktails
     
-def get_full_cocktail_by_name(name) -> CocktailRead | None:
+def get_full_cocktail_by_name(name: str) -> CocktailRead | None:
     with get_connection() as conn:
         cocktail = get_cocktail_by_name(conn, name)
         if not cocktail:
@@ -44,12 +44,12 @@ def get_full_cocktail_by_name(name) -> CocktailRead | None:
         )
         return cocktail_model
     
-def search_by_query(query) -> list[dict]:
+def search_by_query(query: str) -> list[dict]:
     with get_connection() as conn:
         cocktails = search_cocktails(conn, query)
         return cocktails
     
-def delete_cocktail_by_name(name) -> int | None:
+def delete_cocktail_by_name(name: str) -> int | None:
     with get_connection() as conn:
         cocktail_id = delete_cocktail(conn, name)
         conn.commit()

@@ -55,11 +55,14 @@ async def garnish_handler(message:types.Message, state:FSMContext):
 async def method_handler(message: types.Message, state: FSMContext):
     await state.update_data(method=message.text)
     await state.update_data(ingredients = [])
-    await message.answer("""
-Enter ingredient in format: name amount_ml
-Example: Gin 30
-Send /done when finished
-Send /cancel to cancel operation""")
+    await message.answer(
+        "Enter ingredient in format: name amount unit [comment]\n"
+        "Example: Gin 30 ml\n"
+        "Example: Tonic 80 ml on_top\n"
+        "Allowed units: ml, dash, pcs, g\n"
+        "Send /done when finished\n"
+        "Send /cancel to cancel operation"
+)
     await state.set_state(AddCocktail.ingredients)
 # done
 @add_cocktail_router.message(Command("done"), AddCocktail.ingredients)
@@ -78,24 +81,63 @@ async def done_handler(message:types.Message, state:FSMContext):
     await state.clear()
 # ingredients
 @add_cocktail_router.message(AddCocktail.ingredients)
-async def ingredient_handler(message:types.Message, state:FSMContext):
-    if message.text.startswith("/"):
+async def ingredient_handler(message: types.Message, state: FSMContext):
+    if not message.text or message.text.startswith("/"):
         return
+
+    ALLOWED_UNITS = {"ml", "dash", "pcs", "g"}
     parts = message.text.split()
-    if len(parts) < 2:
-        return await message.answer("Invalid format. Example: Gin 30")
-    name =" ".join(parts[:-1])
-    try:
-        amount_ml = int(parts[-1])
-        if amount_ml <= 0:
-            return await message.answer("Amount must be greater than 0")
-    except ValueError:
-        return await message.answer("Amount must be an integer")
+
+    idx = None
+    for i, part in enumerate(parts):
+        if part.isdigit():
+            idx = i
+            break
+
+    if idx is None:
+        return await message.answer(
+            "Invalid format. Example: Gin 30 ml or Tonic 80 ml on_top"
+        )
+
+    if idx + 1 >= len(parts):
+        return await message.answer("Need unit after amount")
+
+    name = " ".join(parts[:idx]).strip()
+    if not name:
+        return await message.answer("Ingredient name is required")
+
+    amount = int(parts[idx])
+    if amount <= 0:
+        return await message.answer("Amount must be greater than 0")
+
+    unit = parts[idx + 1].strip().lower()
+    if unit not in ALLOWED_UNITS:
+        return await message.answer("Invalid unit. Allowed units: ml, dash, pcs, g")
+
+    comment_parts = parts[idx + 2:]
+    comment = " ".join(comment_parts).strip() if comment_parts else None
+
     data = await state.get_data()
     ingredients = data.get("ingredients", [])
-    ingredients.append({"name":name, "amount_ml": amount_ml})
+    ingredients.append(
+        {
+            "name": name,
+            "amount": amount,
+            "unit": unit,
+            "comment": comment,
+        }
+    )
     await state.update_data(ingredients=ingredients)
-    await message.answer(f"""
-Ingredient added: {name} {amount_ml} ml
-Send next ingredient or /done
-Send /cancel to cancel operation""")
+
+    if comment:
+        await message.answer(
+            f"Ingredient added: {name} {amount} {unit} ({comment})\n"
+            f"Send next ingredient or /done\n"
+            f"Send /cancel to cancel operation"
+        )
+    else:
+        await message.answer(
+            f"Ingredient added: {name} {amount} {unit}\n"
+            f"Send next ingredient or /done\n"
+            f"Send /cancel to cancel operation"
+        )

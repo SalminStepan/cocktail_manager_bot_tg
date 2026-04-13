@@ -27,4 +27,3 @@ async def cocktail_handler(message:types.Message):
 
         text = "\n".join(lines)
         await message.answer(text)
-    

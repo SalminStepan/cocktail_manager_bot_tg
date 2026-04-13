@@ -85,7 +85,7 @@ async def ingredient_handler(message: types.Message, state: FSMContext):
     if not message.text or message.text.startswith("/"):
         return
 
-    ALLOWED_UNITS = {"ml", "dash", "pcs", "g"}
+    ALLOWED_UNITS = {"ml", "dash", "pcs", "g", "cube"}
     parts = message.text.split()
 
     idx = None

@@ -40,3 +40,11 @@ def delete_cocktail(conn, name) -> int | None:
     if row:
         return row["id"]
     return None
+
+def update_cocktail(conn, name, field, new_value) -> int | None:
+    with conn.cursor() as cur:
+        cur.execute(f"UPDATE cocktails SET {field} = %s WHERE name = %s RETURNING id;", (new_value, name, ))
+        row = cur.fetchone()
+    if row:
+        return row["id"]
+    return None

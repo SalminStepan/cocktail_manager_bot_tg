@@ -1,5 +1,5 @@
 from db.connection import get_connection
-from repositories.cocktail_repository import create_cocktail, get_all_cocktails_names, get_cocktail_by_name, search_cocktails, delete_cocktail
+from repositories.cocktail_repository import create_cocktail, get_all_cocktails_names, get_cocktail_by_name, search_cocktails, delete_cocktail, update_cocktail
 from repositories.ingredient_repository import create_ingredients, get_ingredients_by_cocktail_id
 from schemas.cocktail import CocktailCreate, CocktailRead
 from schemas.ingredient import IngredientRead
@@ -53,4 +53,14 @@ def delete_cocktail_by_name(name: str) -> int | None:
     with get_connection() as conn:
         cocktail_id = delete_cocktail(conn, name)
         conn.commit()
+        return cocktail_id
+    
+def update_cocktail_by_name(name: str, field: str, new_value: str) -> int | None:
+    fields = {"glass", "garnish", "method"}
+    if field not in fields:
+        return None
+    with get_connection() as conn:
+        cocktail_id = update_cocktail(conn, name, field, new_value)
+        if cocktail_id:
+            conn.commit()
         return cocktail_id

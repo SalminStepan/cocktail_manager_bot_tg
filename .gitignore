@@ -18,3 +18,24 @@ __pycache__/
 
 # system
 .DS_Store
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual env
+venv/
+.venv/
+env/
+ENV/
+
+# dotenv
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store

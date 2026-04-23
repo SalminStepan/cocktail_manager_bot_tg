@@ -1,18 +1,38 @@
 # 🍸 Cocktail Manager Bot
 
-A Telegram bot for managing a cocktail database.
-Allows you to add, search, view, and delete cocktail recipes.
+Telegram bot for managing a cocktail database.
+
+Supports full CRUD operations and allows bartenders to store, search, and manage cocktail recipes in a structured way.
 
 ---
 
 ## 🚀 Features
 
-* ➕ Add cocktails via FSM (step-by-step input)
-* 📋 List all cocktails
-* 🔍 Search by name and ingredients
-* 🍸 View full cocktail recipe
-* ❌ Delete cocktails
-* 📦 Seed script for populating the database
+### Core functionality
+
+- ➕ Add cocktails via FSM (step-by-step input)
+- 📋 List cocktails with pagination
+- 🔍 Search cocktails by name or ingredients
+- 🍸 View full cocktail recipes
+- ❌ Delete cocktails (admin only)
+- ✏️ Edit cocktail fields (admin only)
+
+---
+
+### Ingredient system
+
+Each ingredient has a structured format:
+
+name: str
+amount: int
+unit: str (ml, dash, pcs, g)
+comment: optional (e.g. on_top)
+
+Examples:
+
+Gin 30 ml 
+Angostura 2 dash 
+Tonic 80 ml on_top 
 
 ---
 
@@ -20,53 +40,50 @@ Allows you to add, search, view, and delete cocktail recipes.
 
 The project follows a layered architecture:
 
-```
 handlers → services → repositories → database
-```
 
-* **handlers** — interaction with Telegram (aiogram)
-* **services** — business logic
-* **repositories** — database access (PostgreSQL)
-* **schemas** — Pydantic models
+- handlers — Telegram interaction (aiogram, FSM)
+- services — business logic and validation
+- repositories — database access layer (PostgreSQL)
+- schemas — Pydantic models
 
 ---
 
 ## 🛠️ Tech Stack
 
-* Python 3.10+
-* aiogram
-* PostgreSQL
-* psycopg
-* Pydantic
+- Python 3.10+
+- aiogram (FSM)
+- PostgreSQL
+- psycopg
+- Pydantic
 
 ---
 
 ## ⚙️ Setup
 
-### 1. Clone the repository
+### 1. Clone repository
 
 ```
-git clone <your_repo_url>
+git clone https://github.com/SalminStepan/cocktail_manager_bot_tg.git
 cd cocktail_manager_bot_tg
 ```
 
-### 2. Create virtual environment
+###2. Create virtual environment
 
 ```
 python -m venv .venv
 source .venv/bin/activate
 ```
 
-### 3. Install dependencies
+###3. Install dependencies
 
 ```
 pip install -r requirements.txt
 ```
+---
 
-### 4. Configure `.env`
-
-Create a `.env` file:
-
+###4. Configure .env
+Create .env file:
 ```
 BOT_TOKEN=your_token
 DB_HOST=localhost
@@ -74,84 +91,80 @@ DB_PORT=5432
 DB_NAME=cocktails
 DB_USER=postgres
 DB_PASSWORD=your_password
+ADMIN_IDS=123456789
 ```
 
 ---
 
-## ▶️ Run the bot
+##🗄️ Database setup
 
+Create database and apply migrations:
 ```
-python -m bot.bot
+createdb cocktails
+psql -d cocktails -f db/migrations.sql
 ```
 
 ---
 
-## 🌱 Seed the database
-
-Populate the database with sample cocktails:
-
+##🌱 Seed data
+Populate database with sample cocktails:
 ```
 python -m scripts.seed_cocktails
 ```
 
 ---
 
-## 📋 Available Commands
+##▶️ Run bot
+```
+python -m bot.bot
+```
+---
 
+##🤖 Commands
 ```
 /start — welcome message
 /help — list of commands
-/add — create a cocktail
+/add — create cocktail (admin only)
+/edit <name> — edit cocktail field (admin only)
+/delete <name> — delete cocktail (admin only)
 /list — show cocktails
 /cocktail <name> — show recipe
 /search <query> — search cocktails
-/delete <name> — delete cocktail
 ```
 
 ---
 
-## 📦 Project Structure
-
+##🔐 Permissions
+Admin-only commands:
 ```
-cocktail_manager_bot_tg/
-├── bot/
-├── handlers/
-├── services/
-├── repositories/
-├── schemas/
-├── db/
-├── scripts/
-│   └── seed_cocktails.py
-├── config.py
-├── requirements.txt
-└── README.md
+/add
+/edit
+/delete
 ```
+Admin IDs are configured via .env.
 
 ---
 
-## 🧩 Implementation Highlights
-
-* FSM-based cocktail creation flow
-* Support for multi-word cocktail names
-* SQL JOIN queries for search
-* ON DELETE CASCADE for ingredients
-* Seed script built on service layer
-
----
-
-## 📈 Future Improvements
-
-* Pagination for `/list`
-* Inline keyboard support
-* Image support for cocktails
-* Export to Google Sheets
-* Improved search functionality
+##🧩 Implementation Highlights
+FSM-based input flow for creating and editing cocktails
+Transaction-safe DB operations
+Whitelist-based update system (prevents unsafe SQL)
+Ingredient parsing with flexible input format
+Separation of concerns via layered architecture
 
 ---
 
-## 👤 Author
+##📈 Future Improvements
+Edit ingredients (advanced update flow)
+Inline keyboard support
+Image support for cocktails
+Export to CSV / Google Sheets
+Logging and monitoring
+
+---
+
+##👤 Author
 
 Stepan Salmin
-Python Backend Developer
-
+Junior Python Backend Developer
 ---

@@ -17,7 +17,7 @@ def get_all_cocktails_names(conn, limit, offset) -> list[dict]:
 
 def get_cocktail_by_name(conn, name) -> dict | None:
     with conn.cursor() as cur:
-        cur.execute("SELECT id, name, glass, garnish, method, created_at FROM cocktails WHERE name = %s;", (name,))
+        cur.execute("SELECT id, name, glass, garnish, method, created_at FROM cocktails WHERE name ILIKE %s;", (name,))
         result = cur.fetchone()
         return result
 
@@ -35,7 +35,7 @@ def search_cocktails(conn, query) -> list[dict]:
     
 def delete_cocktail(conn, name) -> int | None:
     with conn.cursor() as cur:
-        cur.execute("DELETE FROM cocktails WHERE name = %s RETURNING id", (name,))
+        cur.execute("DELETE FROM cocktails WHERE name ILIKE %s RETURNING id", (name,))
         row = cur.fetchone()
     if row:
         return row["id"]
@@ -43,7 +43,7 @@ def delete_cocktail(conn, name) -> int | None:
 
 def update_cocktail(conn, name, field, new_value) -> int | None:
     with conn.cursor() as cur:
-        cur.execute(f"UPDATE cocktails SET {field} = %s WHERE name = %s RETURNING id;", (new_value, name, ))
+        cur.execute(f"UPDATE cocktails SET {field} = %s WHERE name ILIKE %s RETURNING id;", (new_value, name, ))
         row = cur.fetchone()
     if row:
         return row["id"]

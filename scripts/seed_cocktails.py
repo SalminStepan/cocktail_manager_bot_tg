@@ -3,188 +3,189 @@ from services.cocktail_services import create_cocktail_with_ingredients
 
 cocktails_data = [
 {
-    "name": "Arnaud",
+    "name": "Adonis",
     "glass": "Cocktail glass",
-    "garnish": "Blackberry",
+    "garnish": "Orange peel",
     "method": "Stir",
     "ingredients": [
-        {"name": "Gin", "amount": 30, "unit": "ml", "comment": None},
-        {"name": "Dry Vermouth", "amount": 30, "unit": "ml", "comment": None},
-        {"name": "Creme de Cassis", "amount": 30, "unit": "ml", "comment": None}
+        {"name": "Sherry Fino", "amount": 45, "unit": "ml", "comment": None},
+        {"name": "Sweet Vermouth Rosso", "amount": 45, "unit": "ml", "comment": None},
+        {"name": "Orange Bitter", "amount": 2, "unit": "dash", "comment": None}
     ]
 },
 {
-    "name": "Barracuda",
+    "name": "Alexander",
     "glass": "Cocktail glass",
-    "garnish": "Pineapple",
+    "garnish": "Nutmeg",
     "method": "Shake",
     "ingredients": [
-        {"name": "Rum white", "amount": 45, "unit": "ml", "comment": None},
-        {"name": "Galliano Vanilla", "amount": 15, "unit": "ml", "comment": None},
-        {"name": "Fresh Pineapple Juise", "amount": 45, "unit": "ml", "comment": None},
-        {"name": "Fresh Lime Juice", "amount": 7, "unit": "ml", "comment": None},
-        {"name": "Prosecco", "amount": 30, "unit": "ml", "comment": None}
+        {"name": "Gin", "amount": 30, "unit": "ml", "comment": None},
+        {"name": "Creme de Cacao", "amount": 30, "unit": "ml", "comment": None},
+        {"name": "Cream", "amount": 30, "unit": "ml", "comment": "10-20%"}
     ]
 },
 {
-    "name": "Bellini",
-    "glass": "Flute",
-    "garnish": "Peach",
-    "method": "Throwing",
+    "name": "Americano",
+    "glass": "Highball",
+    "garnish": "Orange wedge",
+    "method": "Build",
     "ingredients": [
-        {"name": "Peach Puree", "amount": 50, "unit": "ml", "comment": None},
-        {"name": "Prosecco", "amount": 100, "unit": "ml", "comment": None}
+        {"name": "Bitter Campari", "amount": 30, "unit": "ml", "comment": None},
+        {"name": "Sweet Vermouth Rosso", "amount": 30, "unit": "ml", "comment": None},
+        {"name": "Soda Water", "amount": 80, "unit": "ml", "comment": None}
     ]
 },
 {
-    "name": "Between the sheets",
+    "name": "Angel Face",
     "glass": "Cocktail glass",
     "garnish": "Lemon peel",
     "method": "Shake",
     "ingredients": [
-        {"name": "Rum white", "amount": 30, "unit": "ml", "comment": None},
-        {"name": "Cognac", "amount": 30, "unit": "ml", "comment": None},
-        {"name": "Tripple Sec", "amount": 30, "unit": "ml", "comment": None},
-        {"name": "Fresh Lemon Juice", "amount": 15, "unit": "ml", "comment": None}
+        {"name": "Gin", "amount": 30, "unit": "ml", "comment": None},
+        {"name": "Apricot brandy", "amount": 30, "unit": "ml", "comment": None},
+        {"name": "Calvados", "amount": 30, "unit": "ml", "comment": None}
+    ]
+},
+{
+    "name": "Aviation",
+    "glass": "Cocktail glass",
+    "garnish": "Cherry",
+    "method": "Shake",
+    "ingredients": [
+        {"name": "Gin", "amount": 45, "unit": "ml", "comment": None},
+        {"name": "Maraschino", "amount": 15, "unit": "ml", "comment": None},
+        {"name": "Fresh Lemon Juice", "amount": 15, "unit": "ml", "comment": None},
+        {"name": "Creme de voilette", "amount": 5, "unit": "ml", "comment": None},
+    ]
+},
+{
+    "name": "Allies",
+    "glass": "Cocktail glass",
+    "garnish": "No garnish",
+    "method": "Stir",
+    "ingredients": [
+        {"name": "Gin", "amount": 30, "unit": "ml", "comment": None},
+        {"name": "Dry Vermouth", "amount": 30, "unit": "ml", "comment": None},
+        {"name": "Kummel", "amount": 2, "unit": "dash", "comment": None},
+        {"name": "Honey Syrup", "amount": 15, "unit": "ml", "comment": None},
+    ]
+},
+{
+    "name": "Alaska",
+    "glass": "Cocktail glass",
+    "garnish": "Lemon peel",
+    "method": "Stir",
+    "ingredients": [
+        {"name": "Gin Old Tom", "amount": 50, "unit": "ml", "comment": None},
+        {"name": "Chartreuse jaune", "amount": 20, "unit": "ml", "comment": None},
+        {"name": "Orange bitter", "amount": 1, "unit": "dash", "comment": None}
+    ]
+},
+{
+    "name": "Affinity",
+    "glass": "Cocktail glass",
+    "garnish": "Lemon peel",
+    "method": "Stir",
+    "ingredients": [
+        {"name": "Whisky", "amount": 30, "unit": "ml", "comment": None},
+        {"name": "Sweet Vermouth Rosso", "amount": 30, "unit": "ml", "comment": None},
+        {"name": "Dry Vermouth", "amount": 30, "unit": "ml", "comment": None},
+        {"name": "Angostura bitter", "amount": 1, "unit": "dash", "comment": None}
+    ]
+},
+{
+    "name": "Amaretto sour",
+    "glass": "Rocks",
+    "garnish": "Lemon peel",
+    "method": "Shake",
+    "ingredients": [
+        {"name": "Bourbon", "amount": 40, "unit": "ml", "comment": None},
+        {"name": "Amaretto", "amount": 20, "unit": "ml", "comment": None},
+        {"name": "Fresh Lemon Juice", "amount": 20, "unit": "ml", "comment": None},
+        {"name": "Egg White", "amount": 15, "unit": "ml", "comment": None}
+    ]
+},
+{
+    "name": "Apple Jack",
+    "glass": "Cocktail glass",
+    "garnish": "Orange peel",
+    "method": "Stir",
+    "ingredients": [
+        {"name": "Sweet Vermouth Red", "amount": 30, "unit": "ml", "comment": None},
+        {"name": "Laird's Applejack", "amount": 60, "unit": "ml", "comment": None},
+        {"name": "Angostura bitter", "amount_ml": 1, "unit": "dash", "comment": None}
+    ]
+},
+{
+    "name": "Apple Jack Rabbit",
+    "glass": "Cocktail glass",
+    "garnish": "Lemon peel",
+    "method": "Shake",
+    "ingredients": [
+        {"name": "Calvados", "amount": 50, "unit": "ml", "comment": None},
+        {"name": "Fresh Orange Juice", "amount": 20, "unit": "ml", "comment": None},
+        {"name": "Fresh Lemon Juice", "amount": 15, "unit": "ml", "comment": None},
+        {"name": "Marple syrup", "amount": 15, "unit": "ml", "comment": None}
+
     ]
 },
 {
     "name": "Bijou",
     "glass": "Cocktail glass",
     "garnish": "Cherry",
-    "method": "Stir",
-    "ingredients": [
-        {"name": "Gin", "amount": 30, "unit": "ml", "comment": None},
-        {"name": "Sweet Vermouth Red", "amount": 30, "unit": "ml", "comment": None},
-        {"name": "Chartreuse Verte", "amount": 30, "unit": "ml", "comment": None},
-        {"name": "Orange Bitter", "amount": 1, "unit": "dash", "comment": None},
-    ]
-},
-{
-    "name": "Bees Knees",
-    "glass": "Cocktail glass",
-    "garnish": "Lemon peel",
     "method": "Shake",
     "ingredients": [
-        {"name": "Gin", "amount": 50, "unit": "ml", "comment": None},
-        {"name": "Fresh Lemon Juice", "amount": 20, "unit": "ml", "comment": None},
-        {"name": "Fresh Orange Fuice", "amount": 20, "unit": "ml", "comment": None},
-        {"name": "Honey Syrup", "amount": 15, "unit": "ml", "comment": None},
-    ]
-},
-{
-    "name": "Breakfast Martini",
-    "glass": "Cocktail glass",
-    "garnish": "Orange peel",
-    "method": "Shake",
-    "ingredients": [
-        {"name": "Gin", "amount": 45, "unit": "ml", "comment": None},
-        {"name": "Orange confiture", "amount": 30, "unit": "ml", "comment": None},
-        {"name": "Tripple Sec", "amount": 15, "unit": "ml", "comment": None},
-        {"name": "Fresh Lime Juice", "amount": 15, "unit": "ml", "comment": None},
-    ]
-},
-{
-    "name": "Brown Derby",
-    "glass": "Cocktail glass",
-    "garnish": "Grapefuit peel",
-    "method": "Shake",
-    "ingredients": [
-        {"name": "Bourbon", "amount": 45, "unit": "ml", "comment": None},
-        {"name": "Fresh Grapefruit Juice", "amount": 30, "unit": "ml", "comment": None},
-        {"name": "Honey Syrup", "amount": 15, "unit": "ml", "comment": None}
-    ]
-},
-{
-    "name": "Bamboo",
-    "glass": "Cocktail glass",
-    "garnish": "Orange peel",
-    "method": "Stir",
-    "ingredients": [
-        {"name": "Sherry Fino", "amount": 45, "unit": "ml", "comment": None},
-        {"name": "Dry Vermouth", "amount": 45, "unit": "ml", "comment": None},
-        {"name": "Orange Bitter", "amount": 1, "unit": "dash", "comment": None}
+        {"name": "Cognac", "amount": 60, "unit": "ml", "comment": None},
+        {"name": "Sweet Vermouth Rosso", "amount": 30, "unit": "ml", "comment": None},
+        {"name": "Campari Bitter", "amount": 30, "unit": "ml", "comment": None}
     ]
 },
 {
     "name": "Batanga",
     "glass": "Highball",
-    "garnish": "Lime ring",
+    "garnish": "Lime wedge",
     "method": "Build",
     "ingredients": [
         {"name": "Tequila Silver", "amount": 45, "unit": "ml", "comment": None},
-        {"name": "Fresh Lime Juice", "amount": 15, "unit": "ml", "comment": None},
-        {"name": "Coca Cola", "amount_ml": 100, "unit": "ml", "comment": None}
+        {"name": "Coca Cola", "amount": 100, "unit": "ml", "comment": None},
+        {"name": "Fresh Lime Juice", "amount": 15, "unit": "ml", "comment": None}
     ]
 },
 {
-    "name": "Black Russian",
-    "glass": "Rocks",
-    "garnish": "No Garnish",
+    "name": "Brandy Crusta",
+    "glass": "Cocktail glass",
+    "garnish": "Orange peel",
+    "method": "Stir",
+    "ingredients": [
+        {"name": "Brandy", "amount": 50, "unit": "ml", "comment": None},
+        {"name": "Maraschino", "amount": 5, "unit": "ml", "comment": None},
+        {"name": "Triple Sec", "amount": 1, "unit": "bspn", "comment": None},
+        {"name": "Fresh Lemon Juice", "amount": 15, "unit": "ml", "comment": None},
+        {"name": "Sugar syrup", "amount": 1, "unit": "bspn", "comment": None},
+        {"name": "Angostura Bitter", "amount": 2, "unit": "dash", "comment": None}
+    ]
+},
+{
+    "name": "Harvey Wallbanger",
+    "glass": "Highball",
+    "garnish": "Orange wedge",
     "method": "Build",
     "ingredients": [
-        {"name": "Vodka", "amount": 50, "unit": "ml", "comment": None},
-        {"name": "Kahlua", "amount": 20, "unit": "ml", "comment": None}
-    ]
-},
-{
-    "name": "Boulevardier",
-    "glass": "Rocks",
-    "garnish": "Orange peel",
-    "method": "Stir",
-    "ingredients": [
-        {"name": "Bourbon", "amount": 40, "unit": "ml", "comment": None},
-        {"name": "Sweet Vermouth Red", "amount": 30, "unit": "ml", "comment": None},
-        {"name": "Campari Bitter", "amount": 30, "unit": "ml", "comment": None}
-    ]
-},
-{
-    "name": "Bramble",
-    "glass": "Rocks",
-    "garnish": "Blackberry",
-    "method": "Shake",
-    "ingredients": [
-        {"name": "Gin", "amount": 45, "unit": "ml", "comment": None},
-        {"name": "Fresh Lemon Juiice", "amount": 25, "unit": "ml", "comment": None},
-        {"name": "Creme de Mure", "amount": 15, "unit": "ml", "comment": None},
-        {"name": "Sugar Syrup", "amount": 12, "unit": "ml", "comment": None},
-    ]
-},
-{
-    "name": "Bloody Mary",
-    "glass": "Highball",
-    "garnish": "Celery",
-    "method": "Stir",
-    "ingredients": [
         {"name": "Vodka", "amount": 45, "unit": "ml", "comment": None},
-        {"name": "Tomato Juice", "amount": 90, "unit": "ml", "comment": None},
-        {"name": "Fresh Lemon Juice", "amount": 15, "unit": "ml", "comment": None},
-        {"name": "Worcestershire Sauce", "amount": 1, "unit": "dash", "comment": None},
-        {"name": "Tabasco and spices", "amount": 1, "unit": "dash", "comment": None},
-        {"name": "Salt", "amount": 1, "unit": "dash", "comment": None}
+        {"name": "Galliano Vanilla", "amount": 15, "unit": "ml", "comment": None},
+        {"name": "Fresh Orange Juice", "amount": 90, "unit": "ml", "comment": None}
     ]
 },
 {
-    "name": "Blood and Sand",
-    "glass": "Cocktail glass",
-    "garnish": "Orange peel",
-    "method": "Shake",
+    "name": "Hugo",
+    "glass": "Rocks",
+    "garnish": "Fresh mint",
+    "method": "Build",
     "ingredients": [
-        {"name": "Whisky", "amount": 25, "unit": "ml", "comment": None},
-        {"name": "Sweet Vermouth Red", "amount": 25, "unit": "ml", "comment": None},
-        {"name": "Cherry Brandy", "amount": 25, "unit": "ml", "comment": None},
-        {"name": "Fresh Orange Juice", "amount": 25, "unit": "ml", "comment": None},
-    ]
-},
-{
-    "name": "Bacardi",
-    "glass": "Cocktail glass",
-    "garnish": "No garnish",
-    "method": "Shake",
-    "ingredients": [
-        {"name": "Rum Bacardi Blanca", "amount": 45, "unit": "ml", "comment": None},
-        {"name": "Fresh Lime Juice", "amount": 30, "unit": "ml", "comment": None},
-        {"name": "Grenadine syrup", "amount": 15, "unit": "ml", "comment": None},
+        {"name": "Sparkling Wine", "amount": 60, "unit": "ml", "comment": None},
+        {"name": "St-Germain", "amount": 20, "unit": "ml", "comment": None},
+        {"name": "Soda Water", "amount": 15, "unit": "ml", "comment": None},
+        {"name": "Fresh Mint Leaves", "amount": 8, "unit": "pcs", "comment": None}
     ]
 },
 {
@@ -195,163 +196,167 @@ cocktails_data = [
     "ingredients": [
         {"name": "Gin", "amount": 60, "unit": "ml", "comment": None},
         {"name": "Dry Vermouth", "amount": 7, "unit": "ml", "comment": None},
-        {"name": "Sweet Vermouth Red", "amount": 7, "unit": "ml", "comment": None},
+        {"name": "Sweet Vermouth Rosso", "amount": 7, "unit": "ml", "comment": None},
         {"name": "Fresh Orange Juice", "amount": 30, "unit": "ml", "comment": None},
-        {"name": "Orange Bitter", "amount": 1, "unit": "dash", "comment": None},
+        {"name": "Orange Bitter", "amount": 1, "unit": "dash", "comment": None}
     ]
 },
 {
-    "name": "Casino",
+    "name": "Irish Coffee",
     "glass": "Cocktail glass",
-    "garnish": "Orange peel",
+    "garnish": "Coffee",
     "method": "Shake",
     "ingredients": [
-        {"name": "Old Tom Gin", "amount": 40, "unit": "ml", "comment": None},
-        {"name": "Maraschino", "amount": 10, "unit": "ml", "comment": None},
-        {"name": "Fresh Lemon Juice", "amount": 10, "unit": "ml", "comment": None},
-        {"name": "Orange Bitter", "amount": 1, "unit": "ml", "comment": None},
+        {"name": "Whisky", "amount": 50, "unit": "ml", "comment": None},
+        {"name": "Americano Coffee", "amount": 120, "unit": "ml", "comment": "Hot"},
+        {"name": "Sugar", "amount": 2, "unit": "g", "comment": None},
+        {"name": "Whipped cream", "amount": 1, "unit": "ml", "comment": "On top"}
     ]
 },
 {
-    "name": "Clover Club",
+    "name": "Illegal	",
     "glass": "Cocktail glass",
-    "garnish": "Fresh Raspberry",
+    "garnish": "Lemon peel",
     "method": "Shake",
     "ingredients": [
-        {"name": "Gin", "amount": 45, "unit": "ml", "comment": None},
-        {"name": "Fresh Lemon Juice", "amount": 15, "unit": "ml", "comment": None},
-        {"name": "Raspberry Syrup", "amount": 15, "unit": "ml", "comment": None},
-        {"name": "Egg White", "amount": 20, "unit": "ml", "comment": None},
+        {"name": "Mezcal", "amount": 30, "unit": "ml", "comment": None},
+        {"name": "Rum White", "amount": 15, "unit": "ml", "comment": None},
+        {"name": "Maraschino", "amount": 1, "unit": "bspn", "comment": None},
+        {"name": "Falernum Syrup", "amount": 15, "unit": "ml", "comment": None},
+        {"name": "Fresh Lime Juice", "amount": 25, "unit": "ml", "comment": None},
+        {"name": "Sugar syrup", "amount": 10, "unit": "ml", "comment": None},
+        {"name": "Egg White", "amount": 20, "unit": "ml", "comment": None}
     ]
 },
 {
-    "name": "Corpse Reviver #1",
+    "name": "John Collins",
+    "glass": "Highball",
+    "garnish": "Lemon wedge",
+    "method": "Shake",
+    "ingredients": [
+        {"name": "Gin", "amount": 60, "unit": "ml", "comment": None},
+        {"name": "Fresh Lemon Juice", "amount": 25, "unit": "ml", "comment": None},
+        {"name": "Sugar syrup", "amount": 15, "unit": "ml", "comment": None},
+        {"name": "Soda Water", "amount": 50, "unit": "ml", "comment": "On top"}
+    ]
+},
+{
+    "name": "Jungle Bird",
+    "glass": "Rocks",
+    "garnish": "Pineapple",
+    "method": "Shake",
+    "ingredients": [
+        {"name": "Rum Black", "amount": 45, "unit": "ml", "comment": None},
+        {"name": "Bitter Campari", "amount": 20, "unit": "ml", "comment": None},
+        {"name": "Pineapple Juice", "amount": 45, "unit": "ml", "comment": None},
+        {"name": "Demerara syrup", "amount": 15, "unit": "ml", "comment": None},
+        {"name": "Fresh Lime Juice", "amount": 15, "unit": "ml", "comment": None},
+    ]
+},
+{
+    "name": "Jack Rose",
+    "glass": "Cocktail glass",
+    "garnish": "Lemon peel",
+    "method": "Shake",
+    "ingredients": [
+        {"name": "Laird's Applejack", "amount": 50, "unit": "ml", "comment": None},
+        {"name": "Grenadine syrup", "amount": 25, "unit": "ml", "comment": None},
+        {"name": "Fresh Lemon Juice", "amount": 20, "unit": "ml", "comment": None}
+    ]
+},
+{
+    "name": "KIR",
+    "glass": "Wine Glass",
+    "garnish": "No garnish",
+    "method": "Build",
+    "ingredients": [
+        {"name": "White wine dry", "amount": 90, "unit": "ml", "comment": "Use Sparkling Wine for KIR ROYALE"},
+        {"name": "Creme de Cassis", "amount": 10, "unit": "ml", "comment": None}
+    ]
+},
+{
+    "name": "Kamikaze",
+    "glass": "Cocktail glass",
+    "garnish": "Lime wedge",
+    "method": "Shake",
+    "ingredients": [
+        {"name": "Vodka", "amount": 40, "unit": "ml", "comment": None},
+        {"name": "Triple sec", "amount": 20, "unit": "ml", "comment": "Muddled"},
+        {"name": "Fresh Lime Juice", "amount": 20, "unit": "ml", "comment": None}
+    ]
+},
+{
+    "name": "Knickerbocker",
+    "glass": "Rocks",
+    "garnish": "Raspberry",
+    "method": "Shake",
+    "ingredients": [
+        {"name": "Rum White", "amount": 50, "unit": "ml", "comment": None},
+        {"name": "Orage quracao", "amount": 5, "unit": "ml", "comment": None},
+        {"name": "Raspberry syrup", "amount": 20, "unit": "ml", "comment": None},
+        {"name": "Fresh Lime Juice", "amount": 15, "unit": "ml", "comment": None}
+    ]
+},
+{
+    "name": "Lemon Drop Martini",
+    "glass": "Cocktail glass",
+    "garnish": "Sugar crust",
+    "method": "Stir",
+    "ingredients": [
+        {"name": "Vodka Citron", "amount": 30, "unit": "ml", "comment": None},
+        {"name": "Triple Sec", "amount": 20, "unit": "ml", "comment": None},
+        {"name": "Fresh Lemon Juice", "amount": 15, "unit": "cube", "comment": None}
+    ]
+},
+{
+    "name": "Long Island Iced Tea",
+    "glass": "Highball",
+    "garnish": "Lemon wedge",
+    "method": "Build",
+    "ingredients": [
+        {"name": "Vodka", "amount": 15, "unit": "ml", "comment": None},
+        {"name": "Rum White", "amount": 15, "unit": "ml", "comment": None},
+        {"name": "Tequila Silver", "amount": 15, "unit": "ml", "comment": None},
+        {"name": "Gin", "amount": 15, "unit": "ml", "comment": None},
+        {"name": "Triple Sec", "amount": 15, "unit": "ml", "comment": None},
+        {"name": "Fresh Lemon Juice", "amount": 20, "unit": "ml", "comment": None},
+        {"name": "Coca Cola", "amount": 50, "unit": "ml", "comment": None}
+    ]
+},
+{
+    "name": "Last Word",
+    "glass": "Cocktail glass",
+    "garnish": "Lime peel",
+    "method": "Shake",
+    "ingredients": [
+        {"name": "Gin", "amount": 20, "unit": "ml", "comment": None},
+        {"name": "Chartreuse  Jaune", "amount": 20, "unit": "ml", "comment": None},
+        {"name": "Maraschino", "amount": 20, "unit": "ml", "comment": None},
+        {"name": "Fresh Lime Juice", "amount": 20, "unit": "ml", "comment": None}
+    ]
+},
+{
+    "name": "Mai-Tai",
+    "glass": "Rocks",
+    "garnish": "Mint, Lime peel",
+    "method": "Shake",
+    "ingredients": [
+        {"name": "Rum White", "amount": 30, "unit": "ml", "comment": None},
+        {"name": "Rum Black", "amount": 30, "unit": "ml", "comment": "On top"},
+        {"name": "Orange Curacao", "amount": 15, "unit": "ml", "comment": None},
+        {"name": "Orgeat Syrup", "amount": 20, "unit": "ml", "comment": None},
+        {"name": "Fresh Lime Juice", "amount": 25, "unit": "ml", "comment": None}
+    ]
+},
+{
+    "name": "Manhattan",
     "glass": "Cocktail glass",
     "garnish": "Orange peel",
     "method": "Stir",
     "ingredients": [
-        {"name": "Calvados", "amount": 25, "unit": "ml", "comment": None},
-        {"name": "Cognac", "amount": 25, "unit": "ml", "comment": None},
-        {"name": "Sweet Vermouth Bianco", "amount": 25, "unit": "ml", "comment": None},
-    ]
-},
-{
-    "name": "Corpse Reviver #2",
-    "glass": "Cocktail glass",
-    "garnish": "Absinthe",
-    "method": "Shake",
-    "ingredients": [
-        {"name": "Absinthe", "amount": 5, "unit": "ml", "comment": "To rinse"},
-        {"name": "Gin", "amount": 20, "unit": "ml", "comment": None},
-        {"name": "Lillet Blanc", "amount": 20, "unit": "ml", "comment": None},
-        {"name": "Tripple Sec", "amount": 20, "unit": "ml", "comment": None},
-        {"name": "Fresh Lemon Juice", "amount": 20, "unit": "ml", "comment": None},
-    ]
-},
-{
-    "name": "Cosmopolitan",
-    "glass": "Cocktail glass",
-    "garnish": "Orange peel",
-    "method": "Shake",
-    "ingredients": [
-        {"name": "Vodka Citron", "amount": 30, "unit": "ml", "comment": None},
-        {"name": "Cointreau", "amount": 30, "unit": "ml", "comment": None},
-        {"name": "Fresh Lemon Juice", "amount": 25, "unit": "ml", "comment": None},
-        {"name": "CranberryJuice", "amount": 25, "unit": "ml", "comment": None},
-        {"name": "Orange Bitter", "amount": 25, "unit": "ml", "comment": None},
-    ]
-},
-{
-    "name": "Cuba Libre",
-    "glass": "Highball",
-    "garnish": "Lime wedge",
-    "method": "Build",
-    "ingredients": [
-        {"name": "Rum", "amount": 45, "unit": "ml", "comment": None},
-        {"name": "Coca Cola", "amount": 100, "unit": "ml", "comment": None},
-        {"name": "Fresh Lime", "amount": 35, "unit": "g", "comment": "Muddled"},
-    ]
-},
-{
-    "name": "Caipirinha",
-    "glass": "Rocks",
-    "garnish": "Lime wedge",
-    "method": "Muddle",
-    "ingredients": [
-        {"name": "Cachaça", "amount": 60, "unit": "ml", "comment": None},
-        {"name": "Fresh Lime", "amount": 35, "unit": "g", "comment": "Muddled"},
-        {"name": "Simple Syrup", "amount": 15, "unit": "ml", "comment": None},
-    ]
-},
-{
-    "name": "Canchanchara",
-    "glass": "Rocks",
-    "garnish": "Lime slice",
-    "method": "Build",
-    "ingredients": [
-        {"name": "Rum White", "amount": 60, "unit": "ml", "comment": None},
-        {"name": "Fresh Lime Juice", "amount": 15, "unit": "ml", "comment": None},
-        {"name": "Honey Syrup", "amount": 20, "unit": "ml", "comment": None},
-        {"name": "Soda Water", "amount": 15, "unit": "ml", "comment": "Splash"},
-    ]
-},
-{
-    "name": "Champagne Cocktail",
-    "glass": "Cocktail glass",
-    "garnish": "Lemon peel",
-    "method": "Build",
-    "ingredients": [
-        {"name": "Cognac", "amount": 30, "unit": "ml", "comment": None},
-        {"name": "Sparkling Wine Brut", "amount": 100, "unit": "ml", "comment": None},
-        {"name": "Sugar", "amount": 1, "unit": "cube", "comment": None},
-    ]
-},
-{
-    "name": "Cuzco",
-    "glass": "Highball",
-    "garnish": "Grapefruit peel",
-    "method": "Shake",
-    "ingredients": [
-        {"name": "Pisco", "amount": 50, "unit": "ml", "comment": None},
-        {"name": "Aperol", "amount": 20, "unit": "ml", "comment": None},
-        {"name": "Fresh Grapefruit Juice", "amount": 10, "unit": "ml", "comment": None},
-        {"name": "Fresh Lemon Juice", "amount": 10, "unit": "ml", "comment": None},
-        {"name": "Sugar Syrup", "amount": 15, "unit": "ml", "comment": None},
-        {"name": "Kirsch", "amount": 1, "unit": "dash", "comment": "Maraschino+Amaretto 4/1"},
-    ]
-},
-{
-    "name": "Churchill",
-    "glass": "Cocktail glass",
-    "garnish": "Orange peel",
-    "method": "Shake",
-    "ingredients": [
-        {"name": "Whisky", "amount": 45, "unit": "ml", "comment": None},
-        {"name": "Sweet Vermouth Red", "amount": 15, "unit": "ml", "comment": None},
-        {"name": "Tripple sec", "amount": 15, "unit": "ml", "comment": None},
-        {"name": "Fresh Lime Juice", "amount": 15, "unit": "ml", "comment": None},
-    ]
-},
-{
-    "name": "Daiquiri",
-    "glass": "Cocktail glass",
-    "garnish": "No garnish",
-    "method": "Shake",
-    "ingredients": [
-        {"name": "Rum White", "amount": 50, "unit": "ml", "comment": None},
-        {"name": "Sugar Syrup", "amount": 15, "unit": "ml", "comment": None},
-        {"name": "Fresh Lime Juice", "amount": 20, "unit": "ml", "comment": None},
-    ]
-},
-{
-    "name": "Dark'n'Stormy",
-    "glass": "Cocktail glass",
-    "garnish": "Lime wedge",
-    "method": "Shake",
-    "ingredients": [
-        {"name": "Rum BLack", "amount": 60, "unit": "ml", "comment": "On Top"},
-        {"name": "Ginger Ale/Beer", "amount": 100, "unit": "ml", "comment": None},
-        {"name": "Fresh Lime Juice", "amount": 25, "unit": "ml", "comment": None},
+        {"name": "Bourbon", "amount": 60, "unit": "ml", "comment": "Or Rye"},
+        {"name": "Sweet Vermouth Rosso", "amount": 30, "unit": "ml", "comment": None},
+        {"name": "Angostura Bitter", "amount": 2, "unit": "dash", "comment": None}
     ]
 },
 {
@@ -362,230 +367,646 @@ cocktails_data = [
     "ingredients": [
         {"name": "Gin", "amount": 60, "unit": "ml", "comment": None},
         {"name": "Fresh Mint", "amount": 5, "unit": "pcs", "comment": None},
-        {"name": "Peach Bitter", "amount": 25, "unit": "ml", "comment": None},
+        {"name": "Peach Bitter", "amount": 2, "unit": "dash", "comment": None}
     ]
 },
 {
-    "name": "Dry Martini",
+    "name": "Mary Pickford",
     "glass": "Cocktail glass",
     "garnish": "Lemon peel / Olive",
-    "method": "Stir",
-    "ingredients": [
-        {"name": "Gin", "amount": 60, "unit": "ml", "comment": "or Vodka"},
-        {"name": "Dry Vermouth", "amount": 15, "unit": "ml", "comment": "Full guide https://www.diffordsguide.com/g/1121/martini"},
-        {"name": "Orange Bitter", "amount": 1, "unit": "dash", "comment": None},
-    ]
-},
-{
-    "name": "Espresso Martini",
-    "glass": "Cocktail glass",
-    "garnish": "Coffee beans",
     "method": "Shake",
     "ingredients": [
-        {"name": "Vodka", "amount": 30, "unit": "ml", "comment": None},
-        {"name": "Kahlua", "amount": 20, "unit": "ml", "comment": None},
-        {"name": "Espresso", "amount": 30, "unit": "ml", "comment": None},
-        {"name": "Sugar Syrup", "amount": 10, "unit": "ml", "comment": None},
+        {"name": "Rum White", "amount": 45, "unit": "ml", "comment": None},
+        {"name": "Pineapple Juice", "amount": 45, "unit": "ml", "comment": None},
+        {"name": "Maraschino", "amount": 5, "unit": "ml", "comment": None},
+        {"name": "Grenadine syrup", "amount": 5, "unit": "ml", "comment": None}
     ]
 },
 {
-    "name": "El Presidente",
+    "name": "Margarita",
+    "glass": "Cocktail glass",
+    "garnish": "Lime wedge",
+    "method": "Shake",
+    "ingredients": [
+        {"name": "Tequila Silver", "amount": 30, "unit": "ml", "comment": None},
+        {"name": "Triple Sec", "amount": 20, "unit": "ml", "comment": None},
+        {"name": "Fresh Lime Juice", "amount": 30, "unit": "ml", "comment": None}
+    ]
+},
+{
+    "name": "Martinez",
     "glass": "Cocktail glass",
     "garnish": "Orange peel",
     "method": "Stir",
     "ingredients": [
-        {"name": "Rum White", "amount": 50, "unit": "ml", "comment": None},
-        {"name": "Sweet Vermouth Red", "amount": 25, "unit": "ml", "comment": None},
-        {"name": "Orange Curacao Liqueur", "amount": 10, "unit": "ml", "comment": "or Tripple Sec"},
-        {"name": "Grenadine Syrup", "amount": 2, "unit": "dash", "comment": None},
+        {"name": "Gin", "amount": 45, "unit": "ml", "comment": None},
+        {"name": "Sweet Vermouth Rosso", "amount": 45, "unit": "ml", "comment": None},
+        {"name": "Maraschino", "amount": 1, "unit": "bspn", "comment": None},
+        {"name": "Orange bitter", "amount": 2, "unit": "dash", "comment": None},
     ]
 },
 {
-    "name": "El Diablo",
-    "glass": "Highball",
-    "garnish": "Lime wedge",
+    "name": "Mint Julep",
+    "glass": "Copper mug",
+    "garnish": "Mint",
     "method": "Shake",
     "ingredients": [
-        {"name": "Tequila Reposado", "amount": 45, "unit": "ml", "comment": None},
-        {"name": "Creme de Cassis", "amount": 20, "unit": "ml", "comment": None},
-        {"name": "Fresh Lime Juice", "amount": 15, "unit": "ml", "comment": None},
-        {"name": "Ginger Ale / beer", "amount": 100, "unit": "ml", "comment": "on top"},
+        {"name": "Bourbon", "amount": 60, "unit": "ml", "comment": None},
+        {"name": "Fresh Mint Leaves", "amount": 10, "unit": "pcs", "comment": None},
+        {"name": "Sugar syrup", "amount": 10, "unit": "ml", "comment": None}
     ]
 },
 {
-    "name": "Fernadito",
+    "name": "Mimosa",
     "glass": "Highball",
-    "garnish": "Lime wedge / no garnish",
+    "garnish": "No garnish",
     "method": "Build",
     "ingredients": [
-        {"name": "Fernet Branca", "amount": 50, "unit": "ml", "comment": None},
-        {"name": "Coca Cola", "amount": 100, "unit": "ml", "comment": None},
+        {"name": "Fresh Orange Juice", "amount": 75, "unit": "ml", "comment": None},
+        {"name": "Sparkling Wine", "amount": 75, "unit": "ml", "comment": None},
     ]
 },
 {
-    "name": "French 75",
+    "name": "Mojito",
+    "glass": "Highball",
+    "garnish": "Mint, Lime wedge",
+    "method": "Muddle",
+    "ingredients": [
+        {"name": "Rum White", "amount": 45, "unit": "ml", "comment": None},
+        {"name": "Fresh Lime", "amount": 35, "unit": "g", "comment": "Muddled"},
+        {"name": "Sugar Syrup", "amount": 15, "unit": "ml", "comment": None},
+        {"name": "Fresh Mint Leaves", "amount": 14, "unit": "pcs", "comment": None}
+    ]
+},
+{
+    "name": "Monkey Gland",
+    "glass": "Cocktail glass",
+    "garnish": "Orange peel",
+    "method": "Shake",
+    "ingredients": [
+        {"name": "Gin", "amount": 45, "unit": "ml", "comment": None},
+        {"name": "Fresh Orange Juice", "amount": 45, "unit": "ml", "comment": None},
+        {"name": "Absinthe", "amount": 1, "unit": "bspn", "comment": None},
+        {"name": "Grenadine syrup", "amount": 1, "unit": "bspn", "comment": None}
+    ]
+},
+{
+    "name": "Moscow Mule",
+    "glass": "Copper mug",
+    "garnish": "Mint, Lime wedge",
+    "method": "Build",
+    "ingredients": [
+        {"name": "Vodka", "amount": 45, "unit": "ml", "comment": None},
+        {"name": "Ginger Ale", "amount": 120, "unit": "ml", "comment": "or Ginger Beer"},
+        {"name": "Fresh Lime Juice", "amount": 10, "unit": "ml", "comment": None}
+    ]
+},
+{
+    "name": "Naked and Famous",
+    "glass": "Cocktail glass",
+    "garnish": "No garnish",
+    "method": "Shake",
+    "ingredients": [
+        {"name": "Mezcal", "amount": 20, "unit": "ml", "comment": None},
+        {"name": "Aperol", "amount": 20, "unit": "ml", "comment": None},
+        {"name": "Chartreuse  Jaune", "amount": 20, "unit": "ml", "comment": None},
+        {"name": "Fresh Lime Juice", "amount": 20, "unit": "ml", "comment": None}
+    ]
+},
+{
+    "name": "Negroni",
+    "glass": "Rocks",
+    "garnish": "Orange peel",
+    "method": "Stir",
+    "ingredients": [
+        {"name": "Gin", "amount": 30, "unit": "ml", "comment": None},
+        {"name": "Sweet Vermouth Rosso", "amount": 30, "unit": "ml", "comment": None},
+        {"name": "Campari", "amount": 30, "unit": "ml", "comment": None}
+    ]
+},
+{#stop here
+    "name": "Negroni Sbagliato",
+    "glass": "Rocks",
+    "garnish": "Orange peel",
+    "method": "Build",
+    "ingredients": [
+        {"name": "Campari", "amount": 30, "unit": "ml", "comment": None},
+        {"name": "Sweet Vermouth Rosso", "amount": 30, "unit": "ml", "comment": None},
+        {"name": "Sparkling Wine", "amount": 30, "unit": "ml", "comment": None},
+    ]
+},
+{
+    "name": "New York Sour",
+    "glass": "Rocks",
+    "garnish": "No garnish",
+    "method": "Shake",
+    "ingredients": [
+        {"name": "Bourbon", "amount": 25, "unit": "ml", "comment": None},
+        {"name": "Fresh Lemon Juice", "amount": 25, "unit": "ml", "comment": None},
+        {"name": "Sugar syrup", "amount": 25, "unit": "ml", "comment": None},
+        {"name": "Egg white", "amount": 25, "unit": "ml", "comment": None},
+        {"name": "Red Dry Wine", "amount": 25, "unit": "ml", "comment": "On top"},
+    ]
+},
+{
+    "name": "Old Fashioned",
+    "glass": "Rocks",
+    "garnish": "Orange peel",
+    "method": "Stir",
+    "ingredients": [
+        {"name": "Bourbon", "amount": 60, "unit": "ml", "comment": None},
+        {"name": "Sugar syrup", "amount": 10, "unit": "ml", "comment": None},
+        {"name": "Angostura Bitter", "amount": 3, "unit": "dash", "comment": None},
+    ]
+},
+{
+    "name": "Old Pal",
     "glass": "Cocktail glass",
     "garnish": "Lemon peel",
+    "method": "Stir",
+    "ingredients": [
+        {"name": "Rye Whisky", "amount": 30, "unit": "ml", "comment": None},
+        {"name": "Capmari Bitter", "amount": 30, "unit": "ml", "comment": None},
+        {"name": "Dry Vermouth", "amount": 30, "unit": "ml", "comment": None}
+    ]
+},
+{
+    "name": "Old Cuban",
+    "glass": "Cocktail glass",
+    "garnish": "Mint",
+    "method": "Shake",
+    "ingredients": [
+        {"name": "Rum Aged", "amount": 50, "unit": "ml", "comment": None},
+        {"name": "Fresh Lime Juice", "amount": 25, "unit": "ml", "comment": None},
+        {"name": "Sugar syrup", "amount": 20, "unit": "ml", "comment": None},
+        {"name": "Fresh Mint Meaves", "amount": 10, "unit": "pcs", "comment": None},
+        {"name": "Sparkling Wine", "amount": 30, "unit": "ml", "comment": "On top"}
+    ]
+},
+{
+    "name": "Old Flame",
+    "glass": "Cocktail glass",
+    "garnish": "Orange peel",
     "method": "Shake",
     "ingredients": [
         {"name": "Gin", "amount": 30, "unit": "ml", "comment": None},
-        {"name": "Fresh Lime Juice", "amount": 15, "unit": "ml", "comment": None},
-        {"name": "Sugar Syrup", "amount": 15, "unit": "ml", "comment": None},
-        {"name": "Sparkling Wine Brut", "amount": 60, "unit": "ml", "comment": "on top"},
+        {"name": "Triple Sec", "amount": 15, "unit": "ml", "comment": None},
+        {"name": "Sweet Vermouth Rosso", "amount": 15, "unit": "ml", "comment": None},
+        {"name": "Campari Bitter", "amount": 7, "unit": "ml", "comment": None},
+        {"name": "Fresh Orange Juice", "amount": 45, "unit": "ml", "comment": None}
     ]
 },
 {
-    "name": "French Connection",
+    "name": "Paloma",
+    "glass": "Highball",
+    "garnish": "Grapefruit wedge",
+    "method": "Build",
+    "ingredients": [
+        {"name": "Tequila", "amount": 50, "unit": "ml", "comment": None},
+        {"name": "Fresh Lime Juice", "amount": 5, "unit": "ml", "comment": None},
+        {"name": "Salt", "amount": 5, "unit": "g", "comment": "To crust"},
+        {"name": "Pink Grapefruit Soda", "amount": 100, "unit": "ml", "comment": None},
+
+    ]
+},
+{
+    "name": "Paper Plane",
+    "glass": "Cocktail glass",
+    "garnish": "Orange peel",
+    "method": "Shake",
+    "ingredients": [
+        {"name": "Bourbon", "amount": 20, "unit": "ml", "comment": None},
+        {"name": "Aperol", "amount": 20, "unit": "ml", "comment": None},
+        {"name": "Amaro", "amount": 20, "unit": "ml", "comment": None},
+        {"name": "Fresh Lemon Juice", "amount": 20, "unit": "ml", "comment": None}
+    ]
+},
+{
+    "name": "Paradise",
+    "glass": "Cocktail glass",
+    "garnish": "No Garnish",
+    "method": "Shake",
+    "ingredients": [
+        {"name": "Gin", "amount": 50, "unit": "ml", "comment": None},
+        {"name": "Apricot Brandy", "amount": 5, "unit": "ml", "comment": None},
+        {"name": "Fresh Orange Juice", "amount": 10, "unit": "ml", "comment": None}
+    ]
+},
+{
+    "name": "Pegu Club",
+    "glass": "Cocktail glass",
+    "garnish": "Lime peel",
+    "method": "Shake",
+    "ingredients": [
+        {"name": "Gin", "amount": 40, "unit": "ml", "comment": None},
+        {"name": "Orange Curacao", "amount": 20, "unit": "ml", "comment": None},
+        {"name": "Fresh Lime Juice", "amount": 1, "unit": "bspn", "comment": None},
+        {"name": "Angostura Bitter", "amount": 1, "unit": "dash", "comment": None},
+        {"name": "Orange bitter", "amount": 1, "unit": "dash", "comment": None}
+    ]
+},
+{
+    "name": "Pisco Sour",
+    "glass": "Cocktail glass",
+    "garnish": "Angostura bitter drop",
+    "method": "Shake",
+    "ingredients": [
+        {"name": "Pisco", "amount": 50, "unit": "ml", "comment": None},
+        {"name": "Fresh Lemon Juice", "amount": 25, "unit": "ml", "comment": None},
+        {"name": "Sugar syrup", "amount": 15, "unit": "ml", "comment": None},
+        {"name": "Egg White", "amount": 15, "unit": "ml", "comment": None}
+    ]
+},
+{
+    "name": "Planter's Punch",
+    "glass": "Cocktail glass",
+    "garnish": "Lime peel",
+    "method": "Long stir on the glass",
+    "ingredients": [
+        {"name": "Jamaican Rum", "amount": 40, "unit": "ml", "comment": None},
+        {"name": "Sugar Cane Juice", "amount": 30, "unit": "ml", "comment": None},
+        {"name": "Fresh Lime Juice", "amount": 15, "unit": "ml", "comment": None}
+    ]
+},
+{
+    "name": "Penicillin",
+    "glass": "Rocks",
+    "garnish": "Candied ginger",
+    "method": "Shake",
+    "ingredients": [
+        {"name": "Whisky Blended", "amount": 50, "unit": "ml", "comment": None},
+        {"name": "Singe Malt Wisky", "amount": 5, "unit": "ml", "comment": "Islay, on top"},
+        {"name": "Fresh Lemon Juice", "amount": 20, "unit": "ml", "comment": None},
+        {"name": "Honey syrup", "amount": 20, "unit": "ml", "comment": None},
+        {"name": "Fresh Ginger", "amount": 10, "unit": "g", "comment": "Muddled"}
+    ]
+},
+{
+    "name": "Porn Star Martini",
+    "glass": "Cocktail glass",
+    "garnish": "Passionfruit",
+    "method": "Shake",
+    "ingredients": [
+        {"name": "Vodka Vanilla", "amount": 45, "unit": "ml", "comment": None},
+        {"name": "Passionfruit Puree", "amount": 30, "unit": "ml", "comment": None},
+        {"name": "Passion Fruit Liqueur", "amount": 15, "unit": "ml", "comment": None},
+        {"name": "Fresh Lime Juice", "amount": 15, "unit": "ml", "comment": None},
+        {"name": "Vanilla syrup", "amount": 15, "unit": "ml", "comment": None},
+        {"name": "Sparkling Wine", "amount": 60, "unit": "ml", "comment": "On top"}
+    ]
+},
+{
+    "name": "Porto Flip",
+    "glass": "Cocktail glass",
+    "garnish": "Nutmeg",
+    "method": "Shake",
+    "ingredients": [
+        {"name": "Brandy", "amount": 15, "unit": "ml", "comment": None},
+        {"name": "Port Wine Tawny", "amount": 45, "unit": "ml", "comment": None},
+        {"name": "Egg Yolk", "amount": 10, "unit": "ml", "comment": None}
+    ]
+},
+{
+    "name": "Pina Colada",
+    "glass": "Tiki Mug",
+    "garnish": "Pineapple",
+    "method": "Shake",
+    "ingredients": [
+        {"name": "Rum White", "amount": 50, "unit": "ml", "comment": None},
+        {"name": "Coconut Cream", "amount": 30, "unit": "ml", "comment": None},
+        {"name": "Fresh Pineapple Juice", "amount": 50, "unit": "ml", "comment": None}
+    ]
+},
+{
+    "name": "Pink Lady",
+    "glass": "Cocktail glass",
+    "garnish": "Cherry",
+    "method": "Shake",
+    "ingredients": [
+        {"name": "Gin", "amount": 45, "unit": "ml", "comment": None},
+        {"name": "Applejack", "amount": 15, "unit": "ml", "comment": None},
+        {"name": "Fresh Lemon Juice", "amount": 20, "unit": "ml", "comment": None},
+        {"name": "Grenadine syrup", "amount": 7, "unit": "ml", "comment": None},
+        {"name": "Egg White", "amount": 20, "unit": "ml", "comment": None}
+    ]
+},
+{
+    "name": "Painkiller",
+    "glass": "Hurricane",
+    "garnish": "Nutmeg",
+    "method": "Shake",
+    "ingredients": [
+        {"name": "Rum", "amount": 60, "unit": "ml", "comment": None},
+        {"name": "Fresh Pineapple Juice", "amount": 120, "unit": "ml", "comment": None},
+        {"name": "Fresh Orange Juice", "amount": 30, "unit": "ml", "comment": None},
+        {"name": "Coconut Cream", "amount": 30, "unit": "ml", "comment": None}
+    ]
+},
+{
+    "name": "Ramos Gin Fizz",
+    "glass": "Highball",
+    "garnish": "Lime peel",
+    "method": "Shake",
+    "ingredients": [
+        {"name": "Gin", "amount": 45, "unit": "ml", "comment": None},
+        {"name": "Fresh Lemon Juice", "amount": 15, "unit": "ml", "comment": None},
+        {"name": "Fresh Lime Juice", "amount": 15, "unit": "bspn", "comment": None},
+        {"name": "Sugar syrup", "amount": 20, "unit": "ml", "comment": None},
+        {"name": "Cream", "amount": 30, "unit": "ml", "comment": "10-20%"},
+        {"name": "Egg White", "amount": 20, "unit": "ml", "comment": None},
+        {"name": "Orange water", "amount": 3, "unit": "dash", "comment": None},
+        {"name": "Vanilla extract", "amount": 2, "unit": "dash", "comment": None}
+    ]
+},
+{
+    "name": "Revolver",
+    "glass": "Cocktail glass",
+    "garnish": "Orange peel",
+    "method": "Stir",
+    "ingredients": [
+        {"name": "Whisky", "amount": 40, "unit": "ml", "comment": None},
+        {"name": "Kahlua", "amount": 20, "unit": "ml", "comment": None},
+        {"name": "Orange bitter", "amount": 1, "unit": "dash", "comment": None}
+    ]
+},
+{
+    "name": "Rob Roy",
+    "glass": "Cocktail glass",
+    "garnish": "Orange peel",
+    "method": "Stir",
+    "ingredients": [
+        {"name": "Whisky", "amount": 50, "unit": "ml", "comment": None},
+        {"name": "Sweet Vermouth Rosso", "amount": 25, "unit": "ml", "comment": None},
+        {"name": "Orange bitter", "amount": 2, "unit": "dash", "comment": None}
+    ]
+},
+{
+    "name": "Rose",
+    "glass": "Cocktail glass",
+    "garnish": "Cherry",
+    "method": "Stir",
+    "ingredients": [
+        {"name": "Kirsch", "amount": 20, "unit": "ml", "comment": None},
+        {"name": "Dry Vermouth", "amount": 40, "unit": "ml", "comment": None},
+        {"name": "Strawberry Syrup", "amount": 3, "unit": "dash", "comment": None}
+    ]
+},
+{
+    "name": "Rusty Nail",
+    "glass": "Rocks",
+    "garnish": "No garnish",
+    "method": "Stir",
+    "ingredients": [
+        {"name": "Whisky", "amount": 50, "unit": "ml", "comment": None},
+        {"name": "Drambuie", "amount": 25, "unit": "ml", "comment": None}
+    ]
+},
+{
+    "name": "Russian Spring Punch",
+    "glass": "Highball",
+    "garnish": "Blackberry",
+    "method": "Shake",
+    "ingredients": [
+        {"name": "Vodka", "amount": 25, "unit": "ml", "comment": None},
+        {"name": "Creme de Cassis", "amount": 15, "unit": "ml", "comment": None},
+        {"name": "Fresh Lemon Juice", "amount": 25, "unit": "ml", "comment": None},
+        {"name": "Sugar syrup", "amount": 10, "unit": "ml", "comment": None},
+        {"name": "Spakling Wine", "amount": 50, "unit": "ml", "comment": "On top"}
+    ]
+},
+{
+    "name": "Sazerac",
     "glass": "Rocks",
     "garnish": "Lemon peel",
     "method": "Stir",
     "ingredients": [
-        {"name": "Cognac", "amount": 45, "unit": "ml", "comment": None},
-        {"name": "Amaretto", "amount": 30, "unit": "ml", "comment": None},
+        {"name": "Cognac", "amount": 50, "unit": "ml", "comment": "Or Rye Whisky"},
+        {"name": "Absinthe", "amount": 10, "unit": "ml", "comment": "To rinse"},
+        {"name": "Peychard's Bitter", "amount": 2, "unit": "dash", "comment": None},
+        {"name": "Sugar", "amount": 2, "unit": "g", "comment": "or sugar syrup"}
     ]
 },
 {
-    "name": "French Martini",
+    "name": "Sidecar",
     "glass": "Cocktail glass",
-    "garnish": "Pineapple slice",
-    "method": "Shake",
-    "ingredients": [
-        {"name": "Vodka", "amount": 45, "unit": "ml", "comment": None},
-        {"name": "Chambord", "amount": 15, "unit": "ml", "comment": "Creme de cassis(IBA)"},
-        {"name": "Fresh Pineapple Juice", "amount": 15, "unit": "ml", "comment": None},
-    ]
-},
-{
-    "name": "Gimlet",
-    "glass": "Cocktail glass",
-    "garnish": "no garnish",
-    "method": "Stir",
-    "ingredients": [
-        {"name": "Gin", "amount": 50, "unit": "ml", "comment": None},
-        {"name": "Fresh Lime Juice", "amount": 15, "unit": "ml", "comment": "or lime cordial"},
-        {"name": "Sugar syrup", "amount": 15, "unit": "ml", "comment": "or lime cordial"},
-    ]
-},
-{
-    "name": "Gibson",
-    "glass": "Cocktail glass",
-    "garnish": "Pickled Mini Onion",
-    "method": "Stir",
-    "ingredients": [
-        {"name": "Gin", "amount": 60, "unit": "ml", "comment": None},
-        {"name": "Dry Vermouth", "amount": 15, "unit": "ml", "comment": None},
-    ]
-},
-{
-    "name": "Grasshopper",
-    "glass": "Cocktail glass",
-    "garnish": "Mint leave",
-    "method": "Shake",
-    "ingredients": [
-        {"name": "Creme de Menthe", "amount": 30, "unit": "ml", "comment": None},
-        {"name": "Creme de Cacao white", "amount": 30, "unit": "ml", "comment": None},
-        {"name": "Cream", "amount": 30, "unit": "ml", "comment": "10-20%"},
-    ]
-},
-{
-    "name": "Golden Dream",
-    "glass": "Cocktail glass",
-    "garnish": "No garnish",
-    "method": "Shake",
-    "ingredients": [
-        {"name": "Galliano Vanilla", "amount": 25, "unit": "ml", "comment": None},
-        {"name": "Cointreau", "amount": 25, "unit": "ml", "comment": "or Trippke Sec"},
-        {"name": "Cream", "amount": 25, "unit": "ml", "comment": "10-20%"},
-        {"name": "Fresh Orange Juice", "amount": 25, "unit": "ml", "comment": None},
-    ]
-},
-{
-    "name": "Golden Cadillac",
-    "glass": "Cocktail glass",
-    "garnish": "No garnish",
-    "method": "Shake",
-    "ingredients": [
-        {"name": "Galliano Vanilla", "amount": 25, "unit": "ml", "comment": None},
-        {"name": "Creme de Cacao white", "amount": 25, "unit": "ml", "comment": "or Trippke Sec"},
-        {"name": "Cream", "amount": 25, "unit": "ml", "comment": "10-20%"},
-    ]
-},
-{
-    "name": "Gin Fizz",
-    "glass": "Highball",
-    "garnish": "No garnish",
-    "method": "Shake",
-    "ingredients": [
-        {"name": "Gin", "amount": 60, "unit": "ml", "comment": None},
-        {"name": "Fresh Lemon Juice", "amount": 30, "unit": "ml", "comment": None},
-        {"name": "Sugar syrup", "amount": 20, "unit": "ml", "comment": None},
-        {"name": "Egg White", "amount": 20, "unit": "ml", "comment": None},
-        {"name": "Soda Water", "amount": 30, "unit": "ml", "comment": "on top"},
-    ]
-},
-{
-    "name": "God Father",
-    "glass": "Rocks",
     "garnish": "Orange peel",
-    "method": "Stir",
+    "method": "Shake",
     "ingredients": [
-        {"name": "Whisky", "amount": 30, "unit": "ml", "comment": None},
-        {"name": "Amaretto", "amount": 30, "unit": "ml", "comment": None},
+        {"name": "Cognac", "amount": 50, "unit": "ml", "comment": None},
+        {"name": "Triple Sec", "amount": 20, "unit": "ml", "comment": None},
+        {"name": "Fresh Lemon Juice", "amount": 20, "unit": "ml", "comment": None}
     ]
 },
 {
-    "name": "Gin Basil Smash",
-    "glass": "Rocks",
-    "garnish": "Basil leaves",
+    "name": "Screwdriver",
+    "glass": "Highball",
+    "garnish": "Orange wedge",
+    "method": "Build",
+    "ingredients": [
+        {"name": "Vodka", "amount": 50, "unit": "ml", "comment": None},
+        {"name": "Fresh Orange Juice", "amount": 100, "unit": "ml", "comment": None}
+    ]
+},
+{
+    "name": "Southside",
+    "glass": "Cocktail glass",
+    "garnish": "Mint",
     "method": "Shake",
     "ingredients": [
         {"name": "Gin", "amount": 50, "unit": "ml", "comment": None},
-        {"name": "Frash Basil Leaves", "amount": 7, "unit": "g", "comment": None},
-        {"name": "Sugar Syrup", "amount": 15, "unit": "ml", "comment": None},
-        {"name": "Fresh Lemon Juice", "amount": 20, "unit": "ml", "comment": None},
+        {"name": "Sugar syrup", "amount": 15, "unit": "ml", "comment": None},
+        {"name": "Fresh Lemon Juice", "amount": 25, "unit": "ml", "comment": None},
+        {"name": "Fresh Mint Leaves", "amount": 10, "unit": "pcs", "comment": None}
     ]
 },
 {
-    "name": "Gin Tonic",
+    "name": "Stinger",
+    "glass": "Rocks",
+    "garnish": "No garnish",
+    "method": "Stir",
+    "ingredients": [
+        {"name": "Cognac", "amount": 40, "unit": "ml", "comment": None},
+        {"name": "Creme de Menthe", "amount": 20, "unit": "ml", "comment": "Or Branca Menthe"}
+    ]
+},
+{
+    "name": "Sea Breeze",
     "glass": "Highball",
     "garnish": "Lime wedge",
     "method": "Build",
     "ingredients": [
-        {"name": "Gin", "amount": 25, "unit": "ml", "comment": None},
-        {"name": "Tonic", "amount": 25, "unit": "ml", "comment": None},
+        {"name": "Vodka", "amount": 40, "unit": "ml", "comment": None},
+        {"name": "Cranberry Juice", "amount": 120, "unit": "ml", "comment": None},
+        {"name": "Fresh Grapefruit Juice", "amount": 30, "unit": "ml", "comment": None}
+    ]
+},
+
+{
+    "name": "Sex On The Beach",
+    "glass": "Highball",
+    "garnish": "No garnish",
+    "method": "Build",
+    "ingredients": [
+        {"name": "Vodka", "amount": 40, "unit": "ml", "comment": None},
+        {"name": "Peach Schnapps", "amount": 20, "unit": "ml", "comment": "Or Peach Tree Liqueur"},
+        {"name": "Cranberry Juice", "amount": 40, "unit": "ml", "comment": None},
+        {"name": "Fresh Orange Juice", "amount": 40, "unit": "ml", "comment": None}
     ]
 },
 {
-    "name": "Hanky Panky",
+    "name": "Singapore Sling",
+    "glass": "Tiki Mug / Sling",
+    "garnish": "Bamboo leave",
+    "method": "Shake",
+    "ingredients": [
+        {"name": "Gin", "amount": 30, "unit": "ml", "comment": None},
+        {"name": "Maraschino", "amount": 15, "unit": "ml", "comment": None},
+        {"name": "Cointreau", "amount": 7, "unit": "ml", "comment": None},
+        {"name": "DOM Benedictine", "amount": 7, "unit": "ml", "comment": None},
+        {"name": "Fresh Lime Juice", "amount": 15, "unit": "ml", "comment": None},
+        {"name": "Fresh Pineapple Juice", "amount": 120, "unit": "ml", "comment": None},
+        {"name": "Grenadine syrup", "amount": 10, "unit": "ml", "comment": None},
+        {"name": "Angostura Bitter", "amount": 1, "unit": "dash", "comment": None}
+    ]
+},
+{
+    "name": "Tuxedo",
+    "glass": "Cocktail glass",
+    "garnish": "Lemon peel",
+    "method": "Stir",
+    "ingredients": [
+        {"name": "Gin Old Tom", "amount": 40, "unit": "ml", "comment": None},
+        {"name": "Dry Vermouth", "amount": 40, "unit": "ml", "comment": None},
+        {"name": "Maraschino", "amount": 1, "unit": "bspn", "comment": None},
+        {"name": "Absinthe", "amount": 5, "unit": "ml", "comment": "To rinse"},
+        {"name": "Orange Bitter", "amount": 2, "unit": "dash", "comment": None}
+        
+    ]
+},
+{
+    "name": "Tequila Sunrise",
+    "glass": "Highball",
+    "garnish": "Orange wedge",
+    "method": "Build",
+    "ingredients": [
+        {"name": "Tequila Silver", "amount": 45, "unit": "ml", "comment": None},
+        {"name": "Fresh Orange Juice", "amount": 90, "unit": "ml", "comment": None},
+        {"name": "Grenadine syrup", "amount": 15, "unit": "ml", "comment": "last"}
+    ]
+},
+{
+    "name": "Tiramisu",
+    "glass": "Cocktail glass",
+    "garnish": "Chocolate shavings",
+    "method": "Shake",
+    "ingredients": [
+        {"name": "Cognac", "amount": 30, "unit": "ml", "comment": None},
+        {"name": "Kahlua", "amount": 15, "unit": "ml", "comment": None},
+        {"name": "Creme de Cacao brown", "amount": 15, "unit": "ml", "comment": None},
+        {"name": "Cream", "amount": 30, "unit": "ml", "comment": "10-20%"},
+        {"name": "Egg Yolk", "amount": 10, "unit": "ml", "comment": None},
+        {"name": "Mascarpone", "amount": 3, "unit": "bspn", "comment": None},
+    ]
+},
+{
+    "name": "Tom Collins",
+    "glass": "Highball",
+    "garnish": "Lemon wedge",
+    "method": "Build",
+    "ingredients": [
+        {"name": "Gin Old Tom", "amount": 50, "unit": "ml", "comment": None},
+        {"name": "Fresh Lemon Juice", "amount": 20, "unit": "ml", "comment": None},
+        {"name": "Sugar syrup", "amount": 15, "unit": "ml", "comment": None},
+        {"name": "Soda Water", "amount": 50, "unit": "ml", "comment": None},
+
+    ]
+},
+{
+    "name": "Vesper",
     "glass": "Cocktail glass",
     "garnish": "Lemon peel",
     "method": "Stir",
     "ingredients": [
         {"name": "Gin", "amount": 45, "unit": "ml", "comment": None},
-        {"name": "Sweet Vermouth Red", "amount": 45, "unit": "ml", "comment": None},
-        {"name": "Fernet Branca", "amount": 2, "unit": "dash", "comment": None},
+        {"name": "Lillet Blanc", "amount": 10, "unit": "ml", "comment": None},
+        {"name": "Vodka", "amount": 15, "unit": "ml", "comment": None}
     ]
 },
 {
-    "name": "Hemingway special",
-    "glass": "Cocktail glass",
-    "garnish": "Maraschino cherry",
+    "name": "VE.N.T.O",
+    "glass": "Rocks",
+    "garnish": "Lemon peel",
     "method": "Shake",
     "ingredients": [
-        {"name": "Rum White", "amount": 50, "unit": "ml", "comment": None},
-        {"name": "Maraschino", "amount": 5, "unit": "ml", "comment": None},
-        {"name": "Fresh Lime Juice", "amount": 10, "unit": "ml", "comment": None},
-        {"name": "Fresh Grapefriut Juice", "amount": 20, "unit": "ml", "comment": None},
+        {"name": "Grappa", "amount": 40, "unit": "ml", "comment": None},
+        {"name": "Fresh Lemon Juice", "amount": 20, "unit": "ml", "comment": None},
+        {"name": "Chamomile Cordial", "amount": 15, "unit": "ml", "comment": None},
+        {"name": "Egg White", "amount": 10, "unit": "ml", "comment": None},
+        {"name": "Honey mix", "amount": 15, "unit": "ml", "comment": None},
     ]
 },
 {
-    "name": "Horse's Neck",
+    "name": "Whiskey Sour",
     "glass": "Highball",
+    "garnish": "Orange peel",
+    "method": "Shake",
+    "ingredients": [
+        {"name": "Bourbon", "amount": 40, "unit": "ml", "comment": None},
+        {"name": "Fresh Lemon Juice", "amount": 25, "unit": "ml", "comment": None},
+        {"name": "Sugar syrup", "amount": 20, "unit": "ml", "comment": None},
+        {"name": "Egg White", "amount": 20, "unit": "ml", "comment": None}
+    ]
+},
+{
+    "name": "White Lady",
+    "glass": "Cocktail glass",
     "garnish": "Lemon peel",
+    "method": "Shake",
+    "ingredients": [
+        {"name": "Gin", "amount": 40, "unit": "ml", "comment": None},
+        {"name": "Triple Sec", "amount": 30, "unit": "ml", "comment": None},
+        {"name": "Fresh Lemon Juice", "amount": 20, "unit": "ml", "comment": None}
+    ]
+},
+{
+    "name": "White Russian",
+    "glass": "Rocks",
+    "garnish": "No garnish",
     "method": "Build",
     "ingredients": [
-        {"name": "Bourbon", "amount": 50, "unit": "ml", "comment": None},
-        {"name": "Ginger Ale /  Beer", "amount": 100, "unit": "ml", "comment": None},
+        {"name": "Vodka", "amount": 50, "unit": "ml", "comment": None},
+        {"name": "Kahlua", "amount": 20, "unit": "ml", "comment": None},
+        {"name": "Cream", "amount": 30, "unit": "ml", "comment": "10-20%"}
+    ]
+},
+{
+    "name": "Yellow bird",
+    "glass": "Cocktail glass",
+    "garnish": "Baboo leaves",
+    "method": "Shake",
+    "ingredients": [
+        {"name": "Rum White", "amount": 30, "unit": "ml", "comment": None},
+        {"name": "Galliano Vanilla", "amount": 15, "unit": "ml", "comment": None},
+        {"name": "Triple Sec", "amount": 15, "unit": "ml", "comment": None},
+        {"name": "Fresh Lime Juice", "amount": 15, "unit": "ml", "comment": None},
+    ]
+},
+{
+    "name": "Zombie",
+    "glass": "Highball",
+    "garnish": "Lime wedge",
+    "method": "Build",
+    "ingredients": [
+        {"name": "Rum Gold", "amount": 30, "unit": "ml", "comment": None},
+        {"name": "Rum White", "amount": 30, "unit": "ml", "comment": None},
+        {"name": "Rum Overproof", "amount": 20, "unit": "ml", "comment": None},
+        {"name": "Falernum syrup", "amount": 15, "unit": "ml", "comment": None},
+        {"name": "Cinnamon syrup", "amount": 10, "unit": "ml", "comment": None},
+        {"name": "Grenadine syrup", "amount": 1, "unit": "bspn", "comment": None},
+        {"name": "Fresh Grapefruit Juice", "amount": 20, "unit": "ml", "comment": None},
+        {"name": "Angostura Bitter", "amount": 1, "unit": "dash", "comment": None},
+        {"name": "Pernod", "amount": 6, "unit": "dash", "comment": None}
+
     ]
 },
 ]

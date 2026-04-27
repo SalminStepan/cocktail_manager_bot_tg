@@ -68,21 +68,21 @@ git clone https://github.com/SalminStepan/cocktail_manager_bot_tg.git
 cd cocktail_manager_bot_tg
 ```
 
-###2. Create virtual environment
+### 2. Create virtual environment
 
 ```
 python -m venv .venv
 source .venv/bin/activate
 ```
 
-###3. Install dependencies
+### 3. Install dependencies
 
 ```
 pip install -r requirements.txt
 ```
 ---
 
-###4. Configure .env
+### 4. Configure .env
 Create .env file:
 ```
 BOT_TOKEN=your_token
@@ -96,7 +96,7 @@ ADMIN_IDS=123456789
 
 ---
 
-##🗄️ Database setup
+## 🗄️ Database setup
 
 Create database and apply migrations:
 ```
@@ -106,7 +106,7 @@ psql -d cocktails -f db/migrations.sql
 
 ---
 
-##🌱 Seed data
+## 🌱 Seed data
 Populate database with sample cocktails:
 ```
 python -m scripts.seed_cocktails
@@ -114,13 +114,13 @@ python -m scripts.seed_cocktails
 
 ---
 
-##▶️ Run bot
+## ▶️ Run bot
 ```
 python -m bot.bot
 ```
 ---
 
-##🤖 Commands
+## 🤖 Commands
 ```
 /start — welcome message
 /help — list of commands
@@ -134,7 +134,7 @@ python -m bot.bot
 
 ---
 
-##🔐 Permissions
+## 🔐 Permissions
 Admin-only commands:
 ```
 /add
@@ -145,7 +145,7 @@ Admin IDs are configured via .env.
 
 ---
 
-##🧩 Implementation Highlights
+## 🧩 Implementation Highlights
 FSM-based input flow for creating and editing cocktails
 Transaction-safe DB operations
 Whitelist-based update system (prevents unsafe SQL)
@@ -154,7 +154,7 @@ Separation of concerns via layered architecture
 
 ---
 
-##📈 Future Improvements
+## 📈 Future Improvements
 Edit ingredients (advanced update flow)
 Inline keyboard support
 Image support for cocktails
@@ -163,7 +163,7 @@ Logging and monitoring
 
 ---
 
-##👤 Author
+## 👤 Author
 
 Stepan Salmin
 Junior Python Backend Developer

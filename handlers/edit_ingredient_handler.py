@@ -67,34 +67,6 @@ async def edit_cancel_handler(message:types.Message, state:FSMContext):
         await state.clear()
         await message.answer("Operation cancelled")
 
-@edit_ingredients_router.message(EditIngredients.ingredients)
-async def ingredients_handler(message:types.Message, state:FSMContext):
-    if not message.text or message.text.startswith("/"):
-        return
-    try:
-        parsed = parse_ingredient_input(message.text)
-    except ValueError as e:
-        return await message.answer(str(e))
-    data = await state.get_data()
-    ingredients = data.get("ingredients", [])
-    ingredients.append(parsed)
-    await state.update_data(ingredients=ingredients)
-    logger.info(
-        "User %s added ingredient: %s",
-        message.from_user.id,
-        parsed,
-    )
-    line = f"{parsed['name']} {parsed['amount']} {parsed['unit']}"
-
-    if parsed["comment"]:
-        line += f" ({parsed['comment']})"
-
-    await message.answer(
-        f"Ingredient added: {line}\n"
-        f"Send next ingredient or /done\n"
-        f"Send /cancel to cancel operation"
-    )
-
 @edit_ingredients_router.message(Command("done"), EditIngredients.ingredients)
 async def done_handler(message:types.Message, state:FSMContext):
     user_id = message.from_user.id
@@ -142,3 +114,32 @@ async def done_handler(message:types.Message, state:FSMContext):
         name, 
         cocktail_id
     )
+
+@edit_ingredients_router.message(EditIngredients.ingredients)
+async def ingredients_handler(message:types.Message, state:FSMContext):
+    if not message.text or message.text.startswith("/"):
+        return
+    try:
+        parsed = parse_ingredient_input(message.text)
+    except ValueError as e:
+        return await message.answer(str(e))
+    data = await state.get_data()
+    ingredients = data.get("ingredients", [])
+    ingredients.append(parsed)
+    await state.update_data(ingredients=ingredients)
+    logger.info(
+        "User %s added ingredient: %s",
+        message.from_user.id,
+        parsed,
+    )
+    line = f"{parsed['name']} {parsed['amount']} {parsed['unit']}"
+
+    if parsed["comment"]:
+        line += f" ({parsed['comment']})"
+
+    await message.answer(
+        f"Ingredient added: {line}\n"
+        f"Send next ingredient or /done\n"
+        f"Send /cancel to cancel operation"
+    )
+

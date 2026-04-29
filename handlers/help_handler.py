@@ -10,14 +10,15 @@ async def start_handler(message: types.Message):
     await message.answer("""
         🍸 Commands:
 
-        /add — create a new cocktail (step-by-step)
-        /cancel - stop creating a new cocktail
-        /list — show cocktail list
-        /cocktail <name> — show full recipe
-        /search <query> — search cocktails
-        /delete <name> — delete cocktail
-        /edit <name> - edit cocktal (glass, mathod, garnish)
+/add — create a new cocktail (step-by-step)
+/cancel - stop creating a new cocktail
+/list — show cocktail list
+/cocktail <name> — show full recipe
+/search <query> — search cocktails
+/delete <name> — delete cocktail
+/edit <name> - edit cocktail (glass, mathod, garnish)
+/edit_ingredient <name> - edit cocktail ingredients
 
-        Example:
-        /cocktail Negroni
-        /search gin""")
+Example:   
+/cocktail Negroni
+/search gin""")

@@ -1,8 +1,18 @@
 from db.connection import get_connection
-from repositories.cocktail_repository import create_cocktail, get_all_cocktails_names, get_cocktail_by_name, search_cocktails, delete_cocktail, update_cocktail
-from repositories.ingredient_repository import create_ingredients, get_ingredients_by_cocktail_id
+from repositories.cocktail_repository import (
+    create_cocktail, 
+    get_all_cocktails_names, 
+    get_cocktail_by_name, 
+    search_cocktails, 
+    delete_cocktail, 
+    update_cocktail
+)
+from repositories.ingredient_repository import (
+    create_ingredients, 
+    get_ingredients_by_cocktail_id,
+    delete_ingredients_by_cocktail_id)
 from schemas.cocktail import CocktailCreate, CocktailRead
-from schemas.ingredient import IngredientRead
+from schemas.ingredient import IngredientRead, IngredientCreate
 
 
 # Create cocktail with ingredients in single transaction
@@ -63,4 +73,19 @@ def update_cocktail_by_name(name: str, field: str, new_value: str) -> int | None
         cocktail_id = update_cocktail(conn, name, field, new_value)
         if cocktail_id:
             conn.commit()
+        return cocktail_id
+
+def replace_cocktail_ingredients_by_name(name: str, ingredients: list[IngredientCreate]) -> int | None:
+    with get_connection() as conn:
+        cocktail = get_cocktail_by_name(conn, name)
+        
+        if not cocktail:
+            return None
+        
+        cocktail_id = cocktail["id"]
+        delete_ingredients_by_cocktail_id(conn, cocktail_id)
+        create_ingredients(conn, cocktail_id, ingredients)
+        
+        conn.commit()
+        
         return cocktail_id

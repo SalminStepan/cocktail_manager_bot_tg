@@ -10,6 +10,7 @@ from handlers.add_handler import add_cocktail_router
 from handlers.delete_handler import delete_router
 from handlers.help_handler import help_router
 from handlers.edit_handler import edit_router
+from handlers.edit_ingredient_handler import edit_ingredients_router
 
 logging.basicConfig(
     level=logging.INFO,
@@ -31,6 +32,7 @@ async def main():
     dp.include_router(delete_router)
     dp.include_router(help_router)
     dp.include_router(edit_router)
+    dp.include_router(edit_ingredients_router)
 
     try:
         await dp.start_polling(bot)

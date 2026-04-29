@@ -6,6 +6,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
 from services.cocktail_services import create_cocktail_with_ingredients
 from config import ADMIN_IDS
+from utils.ingredient_parser import parse_ingredient_input
 
 logger = logging.getLogger(__name__)
 
@@ -24,11 +25,11 @@ async def add_cocktail_handler(message:types.Message, state:FSMContext):
     user_id = message.from_user.id
 
     if user_id not in ADMIN_IDS:
-        logger.warning(f"Unauthorized /add attempt by user {user_id}")
+        logger.warning("Unauthorized /add attempt by user %s", user_id)
         await message.answer("Access denied")
         return
     
-    logger.info(f"User {user_id} started /add")
+    logger.info("User %s started /add", user_id)
 
     await state.clear()
     await message.answer("Enter cocktail name")
@@ -77,10 +78,10 @@ async def method_handler(message: types.Message, state: FSMContext):
         "Enter ingredient in format: name amount unit [comment]\n"
         "Example: Gin 30 ml\n"
         "Example: Tonic 80 ml on_top\n"
-        "Allowed units: ml, dash, pcs, g\n"
+        "Allowed units: ml, dash, pcs, g, cube, bspn\n"
         "Send /done when finished\n"
         "Send /cancel to cancel operation"
-)
+    )
     await state.set_state(AddCocktail.ingredients)
 # done
 @add_cocktail_router.message(Command("done"), AddCocktail.ingredients)
@@ -105,7 +106,7 @@ async def done_handler(message:types.Message, state:FSMContext):
         await state.clear()
         return await message.answer("Cocktail creation failed")
     
-    logger.info("User %s cerated cocktail '%s' (id=%s)",
+    logger.info("User %s created cocktail '%s' (id=%s)",
         user_id, 
         cocktail.name, 
         cocktail_id
@@ -119,59 +120,27 @@ async def ingredient_handler(message: types.Message, state: FSMContext):
     if not message.text or message.text.startswith("/"):
         return
 
-    ALLOWED_UNITS = {"ml", "dash", "pcs", "g", "cube", "bspn"}
-    parts = message.text.split()
-
-    idx = None
-    for i, part in enumerate(parts):
-        if part.isdigit():
-            idx = i
-            break
-
-    if idx is None:
-        return await message.answer(
-            "Invalid format. Example: Gin 30 ml or Tonic 80 ml on_top"
-        )
-
-    if idx + 1 >= len(parts):
-        return await message.answer("Need unit after amount")
-
-    name = " ".join(parts[:idx]).strip()
-    if not name:
-        return await message.answer("Ingredient name is required")
-
-    amount = int(parts[idx])
-    if amount <= 0:
-        return await message.answer("Amount must be greater than 0")
-
-    unit = parts[idx + 1].strip().lower()
-    if unit not in ALLOWED_UNITS:
-        return await message.answer("Invalid unit. Allowed units: ml, dash, pcs, g")
-
-    comment_parts = parts[idx + 2:]
-    comment = " ".join(comment_parts).strip() if comment_parts else None
+    try:
+        parsed = parse_ingredient_input(message.text)
+    except ValueError as e:
+        return await message.answer(str(e))
 
     data = await state.get_data()
     ingredients = data.get("ingredients", [])
-    ingredients.append(
-        {
-            "name": name,
-            "amount": amount,
-            "unit": unit,
-            "comment": comment,
-        }
-    )
+    ingredients.append(parsed)
     await state.update_data(ingredients=ingredients)
+    logger.info(
+        "User %s added ingredient: %s",
+        message.from_user.id,
+        parsed,
+    )
+    line = f"{parsed['name']} {parsed['amount']} {parsed['unit']}"
 
-    if comment:
-        await message.answer(
-            f"Ingredient added: {name} {amount} {unit} ({comment})\n"
-            f"Send next ingredient or /done\n"
-            f"Send /cancel to cancel operation"
-        )
-    else:
-        await message.answer(
-            f"Ingredient added: {name} {amount} {unit}\n"
-            f"Send next ingredient or /done\n"
-            f"Send /cancel to cancel operation"
-        )
+    if parsed["comment"]:
+        line += f" ({parsed['comment']})"
+
+    await message.answer(
+        f"Ingredient added: {line}\n"
+        f"Send next ingredient or /done\n"
+        f"Send /cancel to cancel operation"
+    )

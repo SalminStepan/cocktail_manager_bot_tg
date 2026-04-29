@@ -23,3 +23,10 @@ def get_ingredients_by_cocktail_id(conn, cocktail_id: int) -> list[dict]:
             (cocktail_id,))
         result = cur.fetchall()
         return result
+
+def delete_ingredients_by_cocktail_id(conn, cocktail_id: int) -> None:
+    with conn.cursor() as cur:
+        cur.execute(
+        "DELETE FROM ingredients WHERE cocktail_id = %s;", 
+        (cocktail_id, )
+        )

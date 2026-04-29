@@ -75,17 +75,24 @@ def update_cocktail_by_name(name: str, field: str, new_value: str) -> int | None
             conn.commit()
         return cocktail_id
 
-def replace_cocktail_ingredients_by_name(name: str, ingredients: list[IngredientCreate]) -> int | None:
+def replace_cocktail_ingredients_by_name(
+    name: str,
+    ingredients: list[dict],
+) -> int | None:
     with get_connection() as conn:
         cocktail = get_cocktail_by_name(conn, name)
-        
+
         if not cocktail:
             return None
-        
+
         cocktail_id = cocktail["id"]
+
         delete_ingredients_by_cocktail_id(conn, cocktail_id)
-        create_ingredients(conn, cocktail_id, ingredients)
-        
+
+        ingredients_models = [IngredientCreate(**i) for i in ingredients]
+
+        create_ingredients(conn, cocktail_id, ingredients_models)
+
         conn.commit()
-        
+
         return cocktail_id

@@ -7,6 +7,7 @@ list_router = Router()
 @list_router.message(Command("list"))
 async def list_handler(message:types.Message):
     parse_msg = message.text.split()
+    
     if len(parse_msg) == 1:
         page = 1
     elif len(parse_msg) == 2:
@@ -22,13 +23,17 @@ async def list_handler(message:types.Message):
     else:
         await message.answer("Usage: /list <page>")
         return
-
+    
     cocktails = list_cocktails(page)
+    
     if not cocktails:
-        await message.answer("No more cocktails")
-    else:
-        lines = [f"🍸 Cocktails (Page {page})",""]
-        for i, cocktail in enumerate(cocktails, start=1):
-            lines.append(f'{i}. {cocktail["name"]}')
-        text = "\n".join(lines)
-        await message.answer(text)
+        return await message.answer("No more cocktails")
+    page_size = 20
+    start_index = (page - 1) * page_size
+    lines = [f"🍸 Cocktails (Page {page})", ""]
+    for i, cocktail in enumerate(cocktails):
+        number = start_index + i + 1
+        lines.append(f"{number}. {cocktail['name']}")
+
+    text = "\n".join(lines)
+    await message.answer(text)

@@ -25,7 +25,7 @@ async def cocktail_handler(message:types.Message):
         for ingredient in cocktail.ingredients:
             line = f"- {ingredient.name} — {ingredient.amount} {ingredient.unit}"
             if ingredient.comment:
-                line += (f"({ingredient.comment})")
+                line += (f" ({ingredient.comment})")
 
             lines.append(line)
         text = "\n".join(lines)

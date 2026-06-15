@@ -26,7 +26,7 @@ def parse_ingredient_input(text: str) -> dict:
 
     unit_part = parts[idx + 1].strip().lower()
     if unit_part not in ALLOWED_UNITS:
-        raise ValueError(f"Invalid unit. Allowed units: {', '.join(ALLOWED_UNITS)}")
+        raise ValueError(f"Invalid unit. Allowed units: {', '.join(sorted(ALLOWED_UNITS))}")
     
     unit = unit_part
 

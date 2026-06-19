@@ -1,6 +1,7 @@
 from aiogram import Router, types
 from aiogram.filters.command import Command
 from services.cocktail_services import list_cocktails
+from utils.keyboards import get_list_keyboard
 
 list_router = Router()
 
@@ -36,4 +37,7 @@ async def list_handler(message:types.Message):
         lines.append(f"{number}. {cocktail['name']}")
 
     text = "\n".join(lines)
-    await message.answer(text)
+    await message.answer(
+        text,
+        reply_markup=get_list_keyboard(page),
+    )

@@ -51,7 +51,7 @@ async def list_handler(message:types.Message):
 
 @list_router.callback_query(lambda callback: callback.data and callback.data.startswith("list:"))
 async def list_callback_handler(callback: types.CallbackQuery):
-    page = int(callback.data.split(";")[1])
+    page = int(callback.data.split(":")[1])
 
     cocktails = list_cocktails(page)
 

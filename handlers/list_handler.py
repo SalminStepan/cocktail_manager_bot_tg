@@ -5,6 +5,18 @@ from utils.keyboards import get_list_keyboard
 
 list_router = Router()
 
+def build_cocktail_list_text(cocktails, page: int) -> str:
+    page_size = 20
+    start_index = (page - 1) * page_size
+
+    lines = [f"🍸 Cocktails (Page {page})", ""]
+    
+    for i, cocktail in enumerate(cocktails):
+        number = start_index + i + 1
+        lines.append(f"{number}. {cocktail['name']}")
+
+    return "\n".join(lines)
+
 @list_router.message(Command("list"))
 async def list_handler(message:types.Message):
     parse_msg = message.text.split()
@@ -29,15 +41,28 @@ async def list_handler(message:types.Message):
     
     if not cocktails:
         return await message.answer("No more cocktails")
-    page_size = 20
-    start_index = (page - 1) * page_size
-    lines = [f"🍸 Cocktails (Page {page})", ""]
-    for i, cocktail in enumerate(cocktails):
-        number = start_index + i + 1
-        lines.append(f"{number}. {cocktail['name']}")
 
-    text = "\n".join(lines)
+    text = build_cocktail_list_text(cocktails, page)
+    
     await message.answer(
         text,
         reply_markup=get_list_keyboard(page),
     )
+
+@list_router.callback_query(lambda callback: callback.data and callback.data.startswith("list:"))
+async def list_callback_handler(callback: types.CallbackQuery):
+    page = int(callback.data.split(";")[1])
+
+    cocktails = list_cocktails(page)
+
+    if not cocktails:
+        await callback.answer("No more cocktails")
+        return
+    
+    text = build_cocktail_list_text(cocktails, page)
+
+    await callback.message.edit_text(
+        text,
+        reply_markup=get_list_keyboard(page),
+    )
+    await callback.answer()

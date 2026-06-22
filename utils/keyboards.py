@@ -24,7 +24,7 @@ def get_cocktail_list_keyboard(cocktails: list[dict], page: int) -> InlineKeyboa
     )
 
     current_button =InlineKeyboardButton(
-        text=f"Page {page}",
+        text=f"Page:{page}",
         callback_data=current_callback,
     )
 
@@ -43,4 +43,16 @@ def get_cocktail_list_keyboard(cocktails: list[dict], page: int) -> InlineKeyboa
         inline_keyboard=rows
     )
 
+    return keyboard
+
+def back_to_list_keyboard(page: int)-> InlineKeyboardMarkup:
+    back_button = InlineKeyboardButton(
+        text="<< Back to list",
+        callback_data=f"list:{page}",
+    )
+    keyboard = InlineKeyboardMarkup(
+        inline_keyboard=[
+            [back_button]
+        ]
+    )
     return keyboard

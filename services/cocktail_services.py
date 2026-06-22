@@ -5,7 +5,8 @@ from repositories.cocktail_repository import (
     get_cocktail_by_name, 
     search_cocktails, 
     delete_cocktail, 
-    update_cocktail
+    update_cocktail,
+    get_cocktail_by_id
 )
 from repositories.ingredient_repository import (
     create_ingredients, 
@@ -35,6 +36,28 @@ def list_cocktails(page: int = 1) ->list[dict]:
 def get_full_cocktail_by_name(name: str) -> CocktailRead | None:
     with get_connection() as conn:
         cocktail = get_cocktail_by_name(conn, name)
+        if not cocktail:
+            return None
+        cocktail_id = cocktail["id"]
+        ingredients = get_ingredients_by_cocktail_id(conn, cocktail_id)
+        ingredients_models = [
+            IngredientRead(**ingredient)
+            for ingredient in ingredients
+        ]
+        cocktail_model = CocktailRead(
+            id=cocktail["id"],
+            name=cocktail["name"],
+            glass=cocktail["glass"],
+            garnish=cocktail["garnish"],
+            method=cocktail["method"],
+            created_at=cocktail["created_at"],
+            ingredients=ingredients_models
+        )
+        return cocktail_model
+    
+def get_full_cocktail_by_id(id: int) -> CocktailRead | None:
+    with get_connection() as conn:
+        cocktail = get_cocktail_by_id(conn, id)
         if not cocktail:
             return None
         cocktail_id = cocktail["id"]

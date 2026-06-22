@@ -20,7 +20,13 @@ def get_cocktail_by_name(conn, name) -> dict | None:
         cur.execute("SELECT id, name, glass, garnish, method, created_at FROM cocktails WHERE name ILIKE %s;", (name,))
         result = cur.fetchone()
         return result
-
+    
+def get_cocktail_by_id(conn, cocktail_id: int):
+    with conn.cursor() as cur:
+        cur.execute("SELECT id, name, glass, garnish, method, created_at FROM cocktails WHERE id = %s;", (cocktail_id,))
+        result = cur.fetchone()
+        return result
+    
 def search_cocktails(conn, query) -> list[dict]:
     with conn.cursor() as cur:
         cur.execute("""

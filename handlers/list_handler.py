@@ -6,7 +6,7 @@ from utils.keyboards import get_cocktail_list_keyboard
 list_router = Router()
 
 def build_cocktail_list_text(cocktails, page: int) -> str:
-    page_size = 20
+    page_size = 10
     start_index = (page - 1) * page_size
 
     lines = [f"🍸 Cocktails (Page {page})", ""]

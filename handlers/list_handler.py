@@ -1,7 +1,7 @@
 from aiogram import Router, types
 from aiogram.filters.command import Command
 from services.cocktail_services import list_cocktails
-from utils.keyboards import get_list_keyboard
+from utils.keyboards import get_cocktail_list_keyboard
 
 list_router = Router()
 
@@ -46,7 +46,7 @@ async def list_handler(message:types.Message):
     
     await message.answer(
         text,
-        reply_markup=get_list_keyboard(page),
+        reply_markup=get_cocktail_list_keyboard(cocktails, page),
     )
 
 @list_router.callback_query(lambda callback: callback.data and callback.data.startswith("list:"))
@@ -63,6 +63,6 @@ async def list_callback_handler(callback: types.CallbackQuery):
 
     await callback.message.edit_text(
         text,
-        reply_markup=get_list_keyboard(page),
+        reply_markup=get_cocktail_list_keyboard(cocktails, page),
     )
     await callback.answer()

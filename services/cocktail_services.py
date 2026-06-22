@@ -27,7 +27,7 @@ def list_cocktails(page: int = 1) ->list[dict]:
     with get_connection() as conn:
         if page < 1:
             page = 1
-        limit = 20
+        limit = 10
         offset = (page - 1) * limit
         cocktails = get_all_cocktails_names(conn, limit, offset)
         return cocktails

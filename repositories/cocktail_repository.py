@@ -11,7 +11,7 @@ def create_cocktail(conn, cocktail: CocktailCreate) -> int:
 
 def get_all_cocktails_names(conn, limit, offset) -> list[dict]:
     with conn.cursor() as cur:
-        cur.execute("SELECT name FROM cocktails ORDER BY id LIMIT %s OFFSET %s;", (limit, offset))
+        cur.execute("SELECT id, name FROM cocktails ORDER BY id LIMIT %s OFFSET %s;", (limit, offset))
         result = cur.fetchall()
         return result
 

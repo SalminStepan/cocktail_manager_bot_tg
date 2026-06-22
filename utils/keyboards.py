@@ -24,7 +24,7 @@ def get_cocktail_list_keyboard(cocktails: list[dict], page: int) -> InlineKeyboa
     )
 
     current_button =InlineKeyboardButton(
-        text=f"Page:{page}",
+        text=f"Page {page}",
         callback_data=current_callback,
     )
 

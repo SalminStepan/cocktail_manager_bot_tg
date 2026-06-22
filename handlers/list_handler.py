@@ -8,16 +8,10 @@ from services.cocktail_services import get_full_cocktail_by_id
 list_router = Router()
 
 def build_cocktail_list_text(cocktails, page: int) -> str:
-    page_size = 10
-    start_index = (page - 1) * page_size
-
-    lines = [f"🍸 Cocktails (Page {page})", ""]
-    
-    for i, cocktail in enumerate(cocktails):
-        number = start_index + i + 1
-        lines.append(f"{number}. {cocktail['name']}")
-
-    return "\n".join(lines)
+    return (
+        f"🍸 Cocktails — Page {page}\n\n"
+        f"Choose a cocktail:"
+    )
 
 @list_router.message(Command("list"))
 async def list_handler(message:types.Message):

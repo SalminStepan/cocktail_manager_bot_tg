@@ -100,3 +100,7 @@ async def cocktail_from_key_handler(callback: types.CallbackQuery):
     )
     
     await callback.answer()
+
+@list_router.callback_query(lambda callback: callback.data == "noop")
+async def noop_callback_handler(callback: types.CallbackQuery):
+    await callback.answer("Already here")

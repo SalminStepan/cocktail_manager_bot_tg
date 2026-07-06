@@ -47,11 +47,15 @@ def get_full_cocktail_by_name(name: str) -> CocktailRead | None:
         cocktail_model = CocktailRead(
             id=cocktail["id"],
             name=cocktail["name"],
+            description=cocktail["description"],
+            image_url=cocktail["image_url"],
             glass=cocktail["glass"],
             garnish=cocktail["garnish"],
             method=cocktail["method"],
-            created_at=cocktail["created_at"],
-            ingredients=ingredients_models
+            parse_status=cocktail["parse_status"],
+            source_url=cocktail["source_url"],
+            ingredients=ingredients_models,
+            created_at=cocktail["created_at"]
         )
         return cocktail_model
     
@@ -69,17 +73,25 @@ def get_full_cocktail_by_id(id: int) -> CocktailRead | None:
         cocktail_model = CocktailRead(
             id=cocktail["id"],
             name=cocktail["name"],
+            description=cocktail["description"],
+            image_url=cocktail["image_url"],
             glass=cocktail["glass"],
             garnish=cocktail["garnish"],
             method=cocktail["method"],
-            created_at=cocktail["created_at"],
-            ingredients=ingredients_models
+            parse_status=cocktail["parse_status"],
+            source_url=cocktail["source_url"],
+            ingredients=ingredients_models,
+            created_at=cocktail["created_at"]
         )
         return cocktail_model
     
-def search_by_query(query: str) -> list[dict]:
+def search_by_query(query: str, page: int = 1) -> list[dict]:
     with get_connection() as conn:
-        cocktails = search_cocktails(conn, query)
+        if page < 1:
+            page = 1
+        limit = 10
+        offset = (page - 1) * limit
+        cocktails = search_cocktails(conn, query, limit, offset)
         return cocktails
     
 def delete_cocktail_by_name(name: str) -> int | None:

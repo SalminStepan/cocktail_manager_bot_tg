@@ -15,10 +15,10 @@ def create_ingredients(conn, cocktail_id: int, ingredients: list[IngredientCreat
 def get_ingredients_by_cocktail_id(conn, cocktail_id: int) -> list[dict]:
     with conn.cursor() as cur:
         cur.execute("""
-            SELECT id, name, amount, unit, comment 
+            SELECT id, position, raw, amount, unit, name, comment, unresolved 
             FROM ingredients 
             WHERE cocktail_id = %s 
-            ORDER BY id ASC;
+            ORDER BY position ASC;
             """, 
             (cocktail_id,))
         result = cur.fetchall()

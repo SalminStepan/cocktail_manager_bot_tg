@@ -1,6 +1,7 @@
 from aiogram import Router, types
 from aiogram.filters.command import Command
 from services.cocktail_services import get_full_cocktail_by_name
+from utils.cocktail_formatter import format_cocktail_text
 
 get_cocktail_router = Router()
 
@@ -10,23 +11,17 @@ async def cocktail_handler(message:types.Message):
     if len(parse_msg) < 2:
         await message.answer("Usage: /cocktail <name>")
         return
-    else:
-        name = " ".join(parse_msg[1:])
-        cocktail = get_full_cocktail_by_name(name)
-        if not cocktail:
-            await message.answer("Cocktail not found")
-            return
-        lines = [f"🍸 {cocktail.name}",""]
-        lines.append(f"Glass: {cocktail.glass}")
-        lines.append(f"Method: {cocktail.method}")
-        lines.append(f"Garnish: {cocktail.garnish}")
-        lines.append("")
-        lines.append(f"Ingredients:")
-        for ingredient in cocktail.ingredients:
-            line = f"- {ingredient.name} — {ingredient.amount} {ingredient.unit}"
-            if ingredient.comment:
-                line += (f" ({ingredient.comment})")
+    
+    name = " ".join(parse_msg[1:])
+    cocktail = get_full_cocktail_by_name(name)
 
-            lines.append(line)
-        text = "\n".join(lines)
+    if not cocktail:
+        await message.answer("Cocktail not found")
+        return
+
+    text = format_cocktail_text(cocktail)
+
+    if cocktail.image_url:
+        await message.answer_photo(photo=cocktail.image_url, caption=text)
+    else:
         await message.answer(text)

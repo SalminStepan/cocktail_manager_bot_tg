@@ -1,9 +1,12 @@
 import asyncio
+
 from aiogram import Router, types
 from aiogram.filters.command import Command
 from services.cocktail_services import list_cocktails
 from utils.keyboards import get_cocktail_list_keyboard, back_to_list_keyboard
 from services.cocktail_services import get_full_cocktail_by_id
+from utils.cocktail_formatter import format_cocktail_text
+
 
 list_router = Router()
 
@@ -57,10 +60,17 @@ async def list_callback_handler(callback: types.CallbackQuery):
     
     text = build_cocktail_list_text(cocktails, page)
 
-    await callback.message.edit_text(
-        text,
-        reply_markup=get_cocktail_list_keyboard(cocktails, page),
-    )
+    if callback.message.text:
+        await callback.message.edit_text(
+            text,
+            reply_markup=get_cocktail_list_keyboard(cocktails, page),
+        )
+    else:
+        await callback.message.delete()
+        await callback.message.answer(
+            text,
+            reply_markup=get_cocktail_list_keyboard(cocktails, page),
+        )
     await callback.answer()
 
 @list_router.callback_query(lambda callback:callback.data and callback.data.startswith('cocktail:'))
@@ -79,26 +89,13 @@ async def cocktail_from_key_handler(callback: types.CallbackQuery):
         await callback.answer("Cocktail not found")
         return
     
-    lines = [f"🍸 {cocktail.name}",""]
-    lines.append(f"Glass: {cocktail.glass}")
-    lines.append(f"Method: {cocktail.method}")
-    lines.append(f"Garnish: {cocktail.garnish}")
-    lines.append("")
-    lines.append(f"Ingredients:")
-    for ingredient in cocktail.ingredients:
-        line = f"- {ingredient.name} — {ingredient.amount} {ingredient.unit}"
-        if ingredient.comment:
-            line += (f" ({ingredient.comment})")
-        
-        lines.append(line)
-        
-    text = "\n".join(lines)
+    text = format_cocktail_text(cocktail)
 
-    await callback.message.edit_text(
-        text,
-        reply_markup=back_to_list_keyboard(page)
-    )
-    
+    if cocktail.image_url:
+        await callback.message.answer_photo(photo=cocktail.image_url, caption=text, reply_markup=back_to_list_keyboard(page))
+    else:
+        await callback.message.answer(text, reply_markup=back_to_list_keyboard(page))
+        
     await callback.answer()
 
 @list_router.callback_query(lambda callback: callback.data == "noop")

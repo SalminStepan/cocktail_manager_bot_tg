@@ -17,17 +17,23 @@ def get_all_cocktails_names(conn, limit, offset) -> list[dict]:
 
 def get_cocktail_by_name(conn, name) -> dict | None:
     with conn.cursor() as cur:
-        cur.execute("SELECT id, name, glass, garnish, method, created_at FROM cocktails WHERE name ILIKE %s;", (name,))
+        cur.execute("""SELECT id, name, description, image_url, glass, garnish, method, parse_status, source_url, created_at
+            FROM cocktails 
+            WHERE name ILIKE %s;
+        """, (name,))
         result = cur.fetchone()
         return result
     
 def get_cocktail_by_id(conn, cocktail_id: int):
     with conn.cursor() as cur:
-        cur.execute("SELECT id, name, glass, garnish, method, created_at FROM cocktails WHERE id = %s;", (cocktail_id,))
+        cur.execute("""
+            SELECT id, name, description, image_url, glass, garnish, method, parse_status, source_url, created_at 
+            FROM cocktails WHERE id = %s;
+        """, (cocktail_id,))
         result = cur.fetchone()
         return result
     
-def search_cocktails(conn, query) -> list[dict]:
+def search_cocktails(conn, query, limit, offset) -> list[dict]:
     with conn.cursor() as cur:
         cur.execute("""
             SELECT DISTINCT c.id, c.name
@@ -35,8 +41,10 @@ def search_cocktails(conn, query) -> list[dict]:
             LEFT JOIN ingredients i ON c.id = i.cocktail_id
             WHERE c.name ILIKE %s
                OR i.name ILIKE %s
-            ORDER BY c.id;
-        """, (f"%{query}%", f"%{query}%"))
+               OR i.raw ILIKE %s
+            ORDER BY c.id
+            LIMIT %s OFFSET %s;
+        """, (f"%{query}%", f"%{query}%", f"%{query}%", limit, offset,))
         return cur.fetchall()
     
 def delete_cocktail(conn, name) -> int | None:

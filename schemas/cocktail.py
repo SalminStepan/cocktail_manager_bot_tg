@@ -13,8 +13,12 @@ class CocktailCreate(BaseModel):
 class CocktailRead(BaseModel):
     id: int
     name: str
-    glass: str
-    garnish: str
-    method: str
+    description: str | None
+    image_url: str | None
+    glass: str | None
+    garnish: str | None
+    method: str | None
+    parse_status: str
+    source_url: str | None
     ingredients: list[IngredientRead]
-    created_at: datetime
+    created_at: datetime | None

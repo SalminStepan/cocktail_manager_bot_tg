@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from decimal import Decimal
 
 class IngredientCreate(BaseModel):
     name: str
@@ -8,7 +9,10 @@ class IngredientCreate(BaseModel):
 
 class IngredientRead(BaseModel):
     id: int
-    name: str
-    amount: int
-    unit: str
-    comment: str | None = None
+    position: int
+    raw: str
+    amount: Decimal | None
+    unit: str | None
+    name: str | None
+    comment: str | None
+    unresolved: bool

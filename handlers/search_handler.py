@@ -86,6 +86,8 @@ async def search_cocktail_from_key_handler(callback: types.CallbackQuery):
     
     text = format_cocktail_text(cocktail)
 
+    await callback.message.delete()
+
     if cocktail.image_url:
         await callback.message.answer_photo(photo=cocktail.image_url, caption=text, reply_markup=back_to_search_keyboard(page, query))
     else:

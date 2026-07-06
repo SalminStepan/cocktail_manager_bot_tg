@@ -6,6 +6,7 @@ from services.cocktail_services import search_by_query
 from utils.keyboards import search_results_keyboard, back_to_search_keyboard
 from services.cocktail_services import get_full_cocktail_by_id
 from utils.cocktail_formatter import format_cocktail_text
+from utils.cocktail_sender import send_cocktail_card
 
 search_router = Router()
 
@@ -88,11 +89,12 @@ async def search_cocktail_from_key_handler(callback: types.CallbackQuery):
 
     await callback.message.delete()
 
-    if cocktail.image_url:
-        await callback.message.answer_photo(photo=cocktail.image_url, caption=text, reply_markup=back_to_search_keyboard(page, query))
-    else:
-        await callback.message.answer(text, reply_markup=back_to_search_keyboard(page, query))
-        
+    await send_cocktail_card(
+        message=callback.message,
+        cocktail=cocktail,
+        text=text,
+        reply_markup=back_to_search_keyboard(page, query),
+    )
     await callback.answer()
 
 @search_router.callback_query(lambda callback: callback.data == "noop")

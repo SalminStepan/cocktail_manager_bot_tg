@@ -1,7 +1,10 @@
 from aiogram import Router, types
 from aiogram.filters.command import Command
+
 from services.cocktail_services import get_full_cocktail_by_name
 from utils.cocktail_formatter import format_cocktail_text
+from utils.cocktail_sender import send_cocktail_card
+
 
 get_cocktail_router = Router()
 
@@ -21,7 +24,8 @@ async def cocktail_handler(message:types.Message):
 
     text = format_cocktail_text(cocktail)
 
-    if cocktail.image_url:
-        await message.answer_photo(photo=cocktail.image_url, caption=text)
-    else:
-        await message.answer(text)
+    await send_cocktail_card(
+        message=message,
+        cocktail=cocktail,
+        text=text,
+    )

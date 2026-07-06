@@ -6,6 +6,7 @@ from services.cocktail_services import list_cocktails
 from utils.keyboards import get_cocktail_list_keyboard, back_to_list_keyboard
 from services.cocktail_services import get_full_cocktail_by_id
 from utils.cocktail_formatter import format_cocktail_text
+from utils.cocktail_sender import send_cocktail_card
 
 
 list_router = Router()
@@ -93,10 +94,12 @@ async def cocktail_from_key_handler(callback: types.CallbackQuery):
 
     await callback.message.delete()
 
-    if cocktail.image_url:
-        await callback.message.answer_photo(photo=cocktail.image_url, caption=text, reply_markup=back_to_list_keyboard(page))
-    else:
-        await callback.message.answer(text, reply_markup=back_to_list_keyboard(page))
+    await send_cocktail_card(
+        message=callback.message,
+        cocktail=cocktail,
+        text=text,
+        reply_markup=back_to_list_keyboard(page),
+    )
         
     await callback.answer()
 

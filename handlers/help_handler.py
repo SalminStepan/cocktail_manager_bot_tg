@@ -10,15 +10,19 @@ async def start_handler(message: types.Message):
     await message.answer("""
         🍸 Commands:
 
-/add — create a new cocktail (step-by-step)
-/cancel - stop creating a new cocktail
-/list — show cocktail list
-/cocktail <name> — show full recipe
-/search <query> — search cocktails
-/delete <name> — delete cocktail
-/edit <name> - edit cocktail (glass, mathod, garnish)
-/edit_ingredient <name> - edit cocktail ingredients
+/cocktail <name>
+Show a cocktail recipe by exact name.
+Example: /cocktail Abbey
 
-Example:   
-/cocktail Negroni
-/search gin""")
+/list
+Browse cocktails page by page.
+
+/search <query>
+Search cocktails by name or ingredient.
+Examples:
+/search gin
+/search martini
+/search absinthe
+
+Note:
+The bot is currently read-only. Add/edit/delete commands are disabled after migration to the new ETL database.""")

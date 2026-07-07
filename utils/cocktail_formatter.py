@@ -27,7 +27,11 @@ def format_cocktail_text(cocktail: CocktailRead) -> str:
         line = format_ingredient(ingredient)
         
         cocktail_text.append(line)
-        
+    
+    if cocktail.source_url:
+        cocktail_text.append("")
+        cocktail_text.append("Source:")
+        cocktail_text.append(cocktail.source_url)
     text = "\n".join(cocktail_text)
 
     return text

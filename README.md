@@ -66,7 +66,7 @@ Each cocktail card includes a source URL back to the original recipe page.
 
 ### List pagination
 
-![List page](screenshots/list_page.png)
+![List page](screenshots/list_results.png)
 
 ---
 

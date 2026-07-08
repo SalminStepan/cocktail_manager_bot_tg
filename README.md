@@ -54,19 +54,19 @@ Each cocktail card includes a source URL back to the original recipe page.
 
 ### Cocktail card with image
 
-![Cocktail with image](docs/screenshots/cocktail_with_image.png)
+![Cocktail with image](screenshots/cocktail_with_image.png)
 
 ### Cocktail card without image
 
-![Cocktail without image](docs/screenshots/cocktail_without_image.png)
+![Cocktail without image](screenshots/cocktail_without_image.png)
 
 ### Search results
 
-![Search results](docs/screenshots/search_results.png)
+![Search results](screenshots/search_command.png)
 
 ### List pagination
 
-![List page](docs/screenshots/list_page.png)
+![List page](screenshots/list_page.png)
 
 ---
 

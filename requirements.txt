@@ -1,5 +1,4 @@
-iniconfig==2.3.0
-packaging==26.2
-pluggy==1.6.0
-Pygments==2.20.0
-pytest==9.1.0
+aiogram==3.27.0
+psycopg[binary]==3.3.3
+pydantic==2.12.5
+python-dotenv==1.2.2

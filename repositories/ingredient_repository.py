@@ -1,7 +1,10 @@
+# Этот файл содержит SQL-запросы к таблице ingredients.
+# Он вынесен отдельно, потому что ингредиенты живут как дочерние записи коктейля и обновляются отдельными операциями.
+
 from schemas.ingredient import IngredientCreate
 
 
-#create ingredient into db
+# Создает ингредиенты для указанного коктейля.
 def create_ingredients(conn, cocktail_id: int, ingredients: list[IngredientCreate]) -> None:
     with conn.cursor() as cur:
         for ingredient in ingredients:
@@ -12,6 +15,7 @@ def create_ingredients(conn, cocktail_id: int, ingredients: list[IngredientCreat
                 """, 
                 (cocktail_id, ingredient.name, ingredient.amount, ingredient.unit, ingredient.comment))
 
+# Возвращает ингредиенты коктейля в порядке позиции.
 def get_ingredients_by_cocktail_id(conn, cocktail_id: int) -> list[dict]:
     with conn.cursor() as cur:
         cur.execute("""
@@ -24,6 +28,7 @@ def get_ingredients_by_cocktail_id(conn, cocktail_id: int) -> list[dict]:
         result = cur.fetchall()
         return result
 
+# Удаляет все ингредиенты указанного коктейля.
 def delete_ingredients_by_cocktail_id(conn, cocktail_id: int) -> None:
     with conn.cursor() as cur:
         cur.execute(

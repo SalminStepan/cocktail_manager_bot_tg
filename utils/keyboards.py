@@ -1,5 +1,9 @@
+# Этот файл собирает inline-клавиатуры для списка, поиска и возврата назад.
+# Он вынесен в utils, чтобы handlers не смешивали бизнес-логику с ручной сборкой Telegram-кнопок.
+
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
+# Собирает inline-клавиатуру списка коктейлей с пагинацией.
 def get_cocktail_list_keyboard(cocktails: list[dict], page: int) -> InlineKeyboardMarkup:
     if page == 1:
         prev_callback = "noop"
@@ -45,6 +49,7 @@ def get_cocktail_list_keyboard(cocktails: list[dict], page: int) -> InlineKeyboa
 
     return keyboard
 
+# Собирает кнопку возврата к странице списка.
 def back_to_list_keyboard(page: int)-> InlineKeyboardMarkup:
     back_button = InlineKeyboardButton(
         text="<< Back to list",
@@ -57,6 +62,7 @@ def back_to_list_keyboard(page: int)-> InlineKeyboardMarkup:
     )
     return keyboard
 
+# Собирает inline-клавиатуру результатов поиска с пагинацией.
 def search_results_keyboard(cocktails: list[dict], page: int, query: str) -> InlineKeyboardMarkup:
     query = " ".join(query.strip().replace(":", " ").split())[:20]
 
@@ -103,6 +109,7 @@ def search_results_keyboard(cocktails: list[dict], page: int, query: str) -> Inl
     )
     return keyboard
 
+# Собирает кнопку возврата к странице результатов поиска.
 def back_to_search_keyboard(page:int, query: str) -> InlineKeyboardMarkup:
     query = " ".join(query.strip().replace(":", " ").split())[:20]
 

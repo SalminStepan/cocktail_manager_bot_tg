@@ -1,3 +1,7 @@
+# Этот файл разбирает текстовый ввод ингредиента в структурированный словарь.
+# Он нужен legacy CRUD/FSM-flow, где админ вводит ингредиенты в свободной текстовой форме.
+
+# Парсит строку ингредиента в name, amount, unit и comment.
 def parse_ingredient_input(text: str) -> dict:
     
     ALLOWED_UNITS = {"ml", "dash", "pcs", "g", "cube", "bspn"}

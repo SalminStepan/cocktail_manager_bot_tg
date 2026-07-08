@@ -1,8 +1,12 @@
+# Этот файл описывает Pydantic-схемы коктейля для создания и чтения.
+# Он нужен как общий контракт между handlers, services и repositories, чтобы данные имели предсказуемую структуру.
+
 from datetime import datetime
 from pydantic import BaseModel
 from schemas.ingredient import IngredientCreate, IngredientRead
 
 
+# Описывает входные данные для создания коктейля вручную.
 class CocktailCreate(BaseModel):
     name: str
     glass: str
@@ -10,6 +14,7 @@ class CocktailCreate(BaseModel):
     method: str
     ingredients: list[IngredientCreate]
 
+# Описывает полную карточку коктейля, которую читает бот.
 class CocktailRead(BaseModel):
     id: int
     name: str

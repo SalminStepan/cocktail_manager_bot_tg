@@ -1,3 +1,6 @@
+# Этот файл является точкой входа Telegram-бота.
+# Здесь создаются Bot и Dispatcher, подключаются роутеры и настраивается меню команд перед запуском polling.
+
 import asyncio
 import logging
 
@@ -22,6 +25,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+# Регистрирует видимые команды бота в Telegram-меню.
 async def set_commands(bot: Bot):
         commands = [
             BotCommand(command="start", description="Start bot"),
@@ -38,6 +42,7 @@ async def set_commands(bot: Bot):
         await bot.set_my_commands(commands)
 logger.info("Bot commands menu configured")
 
+# Создает бота, подключает роутеры и запускает polling.
 async def main():
     logger.info("Starting Cocktail Manager Bot")
 

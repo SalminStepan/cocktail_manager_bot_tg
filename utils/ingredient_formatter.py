@@ -1,5 +1,9 @@
+# Этот файл форматирует ингредиент для вывода в карточке коктейля.
+# Он учитывает нормализованные и unresolved-ингредиенты, чтобы пользователь всегда видел читаемую строку.
+
 from schemas.ingredient import IngredientRead
 
+# Преобразует IngredientRead в одну строку для карточки рецепта.
 def format_ingredient(ingredient: IngredientRead) -> str:
     ingredient_form =["-"]
 

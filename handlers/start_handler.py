@@ -1,10 +1,12 @@
+# Этот файл содержит обработчик команды /start.
+# Он отвечает за первое сообщение пользователю и объясняет базовые возможности read-only бота.
+
 from aiogram import Router, types
 from aiogram.filters.command import Command
 
 
-#router
 start_router = Router()
-#start
+# Отправляет приветствие и краткий список доступных команд.
 @start_router.message(Command("start"))
 async def start_handler(message: types.Message):
     await message.answer(f"""

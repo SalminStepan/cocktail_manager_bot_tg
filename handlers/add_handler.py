@@ -1,3 +1,6 @@
+# Этот файл содержит legacy FSM-flow для добавления коктейля админом.
+# Сейчас write-flow отключен в точке входа, но файл оставлен как история CRUD-версии и база для будущих approved recipes.
+
 import logging
 from aiogram import Router, types
 from aiogram.filters.command import Command
@@ -12,6 +15,7 @@ logger = logging.getLogger(__name__)
 
 add_cocktail_router = Router()
 
+# Описывает FSM-состояния пошагового добавления коктейля.
 class AddCocktail(StatesGroup):
     name = State()
     glass = State()
@@ -19,7 +23,7 @@ class AddCocktail(StatesGroup):
     method = State()
     ingredients = State()
 
-# add
+# Стартует admin-only FSM-flow добавления коктейля.
 @add_cocktail_router.message(Command("add"))
 async def add_cocktail_handler(message:types.Message, state:FSMContext):
     user_id = message.from_user.id
@@ -35,7 +39,7 @@ async def add_cocktail_handler(message:types.Message, state:FSMContext):
     await message.answer("Enter cocktail name")
     await state.set_state(AddCocktail.name)
 
-# cancel
+# Отменяет текущий FSM-flow добавления коктейля.
 @add_cocktail_router.message(Command("cancel"))
 async def cancel_handler(message:types.Message, state:FSMContext):
     user_id = message.from_user.id
@@ -48,28 +52,28 @@ async def cancel_handler(message:types.Message, state:FSMContext):
         await state.clear()
         await message.answer("Operation cancelled")
 
-# name
+# Сохраняет название коктейля и запрашивает бокал.
 @add_cocktail_router.message(AddCocktail.name)
 async def name_handler(message:types.Message, state:FSMContext):
     await state.update_data(name=message.text)
     await message.answer("Enter glass")
     await state.set_state(AddCocktail.glass)
 
-# glass
+# Сохраняет бокал и запрашивает гарнир.
 @add_cocktail_router.message(AddCocktail.glass)
 async def glass_handler(message:types.Message, state:FSMContext):
     await state.update_data(glass=message.text)
     await message.answer("Enter garnish")
     await state.set_state(AddCocktail.garnish)
 
-# garnish
+# Сохраняет гарнир и запрашивает метод приготовления.
 @add_cocktail_router.message(AddCocktail.garnish)
 async def garnish_handler(message:types.Message, state:FSMContext):
     await state.update_data(garnish=message.text)
     await message.answer("Enter method")
     await state.set_state(AddCocktail.method)
 
-# method
+# Сохраняет метод и переводит FSM к вводу ингредиентов.
 @add_cocktail_router.message(AddCocktail.method)
 async def method_handler(message: types.Message, state: FSMContext):
     await state.update_data(method=message.text)
@@ -83,7 +87,7 @@ async def method_handler(message: types.Message, state: FSMContext):
         "Send /cancel to cancel operation"
     )
     await state.set_state(AddCocktail.ingredients)
-# done
+# Создает коктейль с ингредиентами после команды /done.
 @add_cocktail_router.message(Command("done"), AddCocktail.ingredients)
 async def done_handler(message:types.Message, state:FSMContext):
     user_id = message.from_user.id
@@ -114,7 +118,7 @@ async def done_handler(message:types.Message, state:FSMContext):
     await message.answer(f"Cocktail created with id: {cocktail_id}")
     await state.clear()
 
-# ingredients
+# Парсит очередной ингредиент и сохраняет его в FSM data.
 @add_cocktail_router.message(AddCocktail.ingredients)
 async def ingredient_handler(message: types.Message, state: FSMContext):
     if not message.text or message.text.startswith("/"):

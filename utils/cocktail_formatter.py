@@ -1,7 +1,11 @@
+# Этот файл форматирует полный рецепт коктейля в текст для Telegram.
+# Он отделяет внешний вид карточки от handlers и сервисов, включая ингредиенты и ссылку на источник.
+
 from utils.ingredient_formatter import format_ingredient
 from schemas.cocktail import CocktailRead
 
 
+# Собирает текст полной карточки коктейля для Telegram.
 def format_cocktail_text(cocktail: CocktailRead) -> str:
     cocktail_text = [f"🍸 {cocktail.name}",""]
     

@@ -1,3 +1,6 @@
+# Этот файл содержит legacy FSM-flow для полной замены ингредиентов коктейля.
+# Он нужен как отдельный handler, потому что редактирование ингредиентов сложнее обычного обновления одного поля.
+
 import logging
 from aiogram import Router, types
 from aiogram.filters.command import Command
@@ -12,9 +15,11 @@ logger = logging.getLogger(__name__)
 
 edit_ingredients_router = Router()
 
+# Описывает FSM-состояние замены ингредиентов коктейля.
 class EditIngredients(StatesGroup):
     ingredients = State()
 
+# Стартует admin-only FSM-flow замены списка ингредиентов.
 @edit_ingredients_router.message(Command("edit_ingredients"))
 async def edit_ingredients(message:types.Message, state:FSMContext):
     user_id = message.from_user.id
@@ -55,6 +60,7 @@ async def edit_ingredients(message:types.Message, state:FSMContext):
 Send /done when finished or /cancel""")
         await state.set_state(EditIngredients.ingredients)
 
+# Отменяет текущий FSM-flow редактирования ингредиентов.
 @edit_ingredients_router.message(Command("cancel"), EditIngredients.ingredients)
 async def edit_cancel_handler(message:types.Message, state:FSMContext):
     user_id = message.from_user.id
@@ -67,6 +73,7 @@ async def edit_cancel_handler(message:types.Message, state:FSMContext):
         await state.clear()
         await message.answer("Operation cancelled")
 
+# Заменяет ингредиенты коктейля после команды /done.
 @edit_ingredients_router.message(Command("done"), EditIngredients.ingredients)
 async def done_handler(message:types.Message, state:FSMContext):
     user_id = message.from_user.id
@@ -115,6 +122,7 @@ async def done_handler(message:types.Message, state:FSMContext):
         cocktail_id
     )
 
+# Парсит новый ингредиент и добавляет его во временный список FSM.
 @edit_ingredients_router.message(EditIngredients.ingredients)
 async def ingredients_handler(message:types.Message, state:FSMContext):
     if not message.text or message.text.startswith("/"):

@@ -1,3 +1,6 @@
+# Этот файл содержит legacy seed-датасет и функцию загрузки коктейлей в базу.
+# Он полезен для локальной разработки старой CRUD-версии, но не является основным источником данных после ETL-миграции.
+
 from schemas.cocktail import CocktailCreate
 from services.cocktail_services import create_cocktail_with_ingredients
 
@@ -1011,6 +1014,7 @@ cocktails_data = [
 },
 ]
 
+# Загружает статический список коктейлей через сервис создания.
 def seed_cocktails(cocktails_data:list[dict]) -> None:
     for cocktail_dict in cocktails_data:
         try:

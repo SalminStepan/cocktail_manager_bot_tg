@@ -1,3 +1,6 @@
+# Этот файл отправляет карточку коктейля в Telegram как фото с caption или как обычный текст.
+# Он нужен для image fallback: если URL невалидный или Telegram не принял фото, пользователь все равно получает рецепт.
+
 from urllib.parse import urlparse
 
 from aiogram.exceptions import TelegramBadRequest
@@ -6,6 +9,7 @@ from aiogram.types import InlineKeyboardMarkup, Message
 from schemas.cocktail import CocktailRead
 
 
+# Проверяет, что image_url похож на HTTP/HTTPS-ссылку.
 def is_valid_http_url(url: str | None) -> bool:
     if not url:
         return False
@@ -18,6 +22,7 @@ def is_valid_http_url(url: str | None) -> bool:
     )
 
 
+# Отправляет карточку коктейля с фото или fallback-текстом.
 async def send_cocktail_card(
     message: Message,
     cocktail: CocktailRead,

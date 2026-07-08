@@ -1,7 +1,10 @@
+# Этот файл содержит SQL-запросы к таблице cocktails.
+# Он является repository layer: принимает готовое соединение и не знает о Telegram, FSM или форматировании ответов.
+
 from schemas.cocktail import CocktailCreate
 
 
-#create cocktail db
+# Создает строку коктейля и возвращает новый id.
 def create_cocktail(conn, cocktail: CocktailCreate) -> int:
     with conn.cursor() as cur:
         cur.execute("INSERT INTO cocktails (name, glass, garnish, method) VALUES (%s, %s, %s, %s) RETURNING id;", 
@@ -9,12 +12,14 @@ def create_cocktail(conn, cocktail: CocktailCreate) -> int:
         row = cur.fetchone()
     return row["id"]
 
+# Возвращает страницу id и названий коктейлей.
 def get_all_cocktails_names(conn, limit, offset) -> list[dict]:
     with conn.cursor() as cur:
         cur.execute("SELECT id, name FROM cocktails ORDER BY id LIMIT %s OFFSET %s;", (limit, offset))
         result = cur.fetchall()
         return result
 
+# Ищет полный ряд коктейля по названию без учета регистра.
 def get_cocktail_by_name(conn, name) -> dict | None:
     with conn.cursor() as cur:
         cur.execute("""SELECT id, name, description, image_url, glass, garnish, method, parse_status, source_url, created_at
@@ -24,6 +29,7 @@ def get_cocktail_by_name(conn, name) -> dict | None:
         result = cur.fetchone()
         return result
     
+# Ищет полный ряд коктейля по id.
 def get_cocktail_by_id(conn, cocktail_id: int):
     with conn.cursor() as cur:
         cur.execute("""
@@ -33,6 +39,7 @@ def get_cocktail_by_id(conn, cocktail_id: int):
         result = cur.fetchone()
         return result
     
+# Ищет коктейли по названию, имени ингредиента или raw-строке.
 def search_cocktails(conn, query, limit, offset) -> list[dict]:
     with conn.cursor() as cur:
         cur.execute("""
@@ -47,6 +54,7 @@ def search_cocktails(conn, query, limit, offset) -> list[dict]:
         """, (f"%{query}%", f"%{query}%", f"%{query}%", limit, offset,))
         return cur.fetchall()
     
+# Удаляет коктейль по названию и возвращает id удаленной строки.
 def delete_cocktail(conn, name) -> int | None:
     with conn.cursor() as cur:
         cur.execute("DELETE FROM cocktails WHERE name ILIKE %s RETURNING id", (name,))
@@ -55,6 +63,7 @@ def delete_cocktail(conn, name) -> int | None:
         return row["id"]
     return None
 
+# Обновляет разрешенное поле коктейля и возвращает его id.
 def update_cocktail(conn, name, field, new_value) -> int | None:
     with conn.cursor() as cur:
         cur.execute(f"UPDATE cocktails SET {field} = %s WHERE name ILIKE %s RETURNING id;", (new_value, name, ))

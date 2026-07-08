@@ -1,3 +1,6 @@
+# Этот файл содержит legacy admin-команду удаления коктейля.
+# Он отделяет опасную write-операцию от публичных read-only сценариев и проверяет права администратора.
+
 import logging
 from aiogram import Router, types
 from aiogram.filters.command import Command
@@ -7,6 +10,7 @@ from config import ADMIN_IDS
 logger = logging.getLogger(__name__)
 delete_router = Router()
 
+# Обрабатывает admin-only удаление коктейля по названию.
 @delete_router.message(Command("delete"))
 async def delete_cocktail_handler(message: types.Message):
     user_id = message.from_user.id

@@ -1,3 +1,6 @@
+# Этот файл содержит бизнес-сценарии работы с коктейлями поверх репозиториев.
+# Он открывает соединения, собирает CocktailRead с ингредиентами и держит транзакции вне Telegram handlers.
+
 from db.connection import get_connection
 from repositories.cocktail_repository import (
     create_cocktail, 
@@ -16,7 +19,7 @@ from schemas.cocktail import CocktailCreate, CocktailRead
 from schemas.ingredient import IngredientRead, IngredientCreate
 
 
-# Create cocktail with ingredients in single transaction
+# Создает коктейль и ингредиенты в одной транзакции.
 def create_cocktail_with_ingredients(cocktail: CocktailCreate) -> int:
     with get_connection() as conn:
         cocktail_id = create_cocktail(conn, cocktail)
@@ -24,6 +27,7 @@ def create_cocktail_with_ingredients(cocktail: CocktailCreate) -> int:
         conn.commit()
         return cocktail_id
 
+# Возвращает страницу коктейлей для /list.
 def list_cocktails(page: int = 1) ->list[dict]:
     with get_connection() as conn:
         if page < 1:
@@ -33,6 +37,7 @@ def list_cocktails(page: int = 1) ->list[dict]:
         cocktails = get_all_cocktails_names(conn, limit, offset)
         return cocktails
     
+# Собирает полный CocktailRead по названию.
 def get_full_cocktail_by_name(name: str) -> CocktailRead | None:
     with get_connection() as conn:
         cocktail = get_cocktail_by_name(conn, name)
@@ -59,6 +64,7 @@ def get_full_cocktail_by_name(name: str) -> CocktailRead | None:
         )
         return cocktail_model
     
+# Собирает полный CocktailRead по id.
 def get_full_cocktail_by_id(id: int) -> CocktailRead | None:
     with get_connection() as conn:
         cocktail = get_cocktail_by_id(conn, id)
@@ -85,6 +91,7 @@ def get_full_cocktail_by_id(id: int) -> CocktailRead | None:
         )
         return cocktail_model
     
+# Возвращает страницу результатов поиска по строке пользователя.
 def search_by_query(query: str, page: int = 1) -> list[dict]:
     with get_connection() as conn:
         if page < 1:
@@ -94,12 +101,14 @@ def search_by_query(query: str, page: int = 1) -> list[dict]:
         cocktails = search_cocktails(conn, query, limit, offset)
         return cocktails
     
+# Удаляет коктейль по названию через repository layer.
 def delete_cocktail_by_name(name: str) -> int | None:
     with get_connection() as conn:
         cocktail_id = delete_cocktail(conn, name)
         conn.commit()
         return cocktail_id
     
+# Проверяет поле и обновляет коктейль по названию.
 def update_cocktail_by_name(name: str, field: str, new_value: str) -> int | None:
     fields = {"glass", "garnish", "method"}
     if field not in fields:
@@ -110,6 +119,7 @@ def update_cocktail_by_name(name: str, field: str, new_value: str) -> int | None
             conn.commit()
         return cocktail_id
 
+# Полностью заменяет список ингредиентов коктейля.
 def replace_cocktail_ingredients_by_name(
     name: str,
     ingredients: list[dict],

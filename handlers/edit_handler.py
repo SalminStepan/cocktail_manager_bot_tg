@@ -1,3 +1,6 @@
+# Этот файл содержит legacy FSM-flow для редактирования основных полей коктейля.
+# Он отделен от read-only handlers, потому что меняет данные и требует проверки прав администратора.
+
 from aiogram import Router, types
 from aiogram.filters.command import Command
 from aiogram.fsm.context import FSMContext
@@ -10,12 +13,12 @@ import logging
 logger = logging.getLogger(__name__)
 edit_router = Router()
 
-#create fsm class
+# Описывает FSM-состояния редактирования одного поля коктейля.
 class EditCocktail(StatesGroup):
     select_field = State()
     new_value = State()
 
-#edit <cocktail_name> cmd
+# Стартует admin-only FSM-flow редактирования коктейля.
 @edit_router.message(Command("edit"))
 async def edit_cocktail_handler(message:types.Message, state:FSMContext):
     user_id = message.from_user.id
@@ -48,7 +51,7 @@ async def edit_cocktail_handler(message:types.Message, state:FSMContext):
 - method""")
     await state.set_state(EditCocktail.select_field)
 
-# cancel cmd
+# Отменяет текущий FSM-flow редактирования коктейля.
 @edit_router.message(Command("cancel"), EditCocktail)
 async def edit_cancel_handler(message:types.Message, state:FSMContext):
     state_now = await state.get_state()
@@ -63,7 +66,7 @@ async def edit_cancel_handler(message:types.Message, state:FSMContext):
         await state.clear()
         await message.answer("Operation cancelled")
 
-#select field cmd
+# Проверяет выбранное поле и запрашивает новое значение.
 @edit_router.message(EditCocktail.select_field)
 async def select_field_handler(message:types.Message, state:FSMContext):
     fields = {"glass", "garnish", "method"}
@@ -79,7 +82,7 @@ async def select_field_handler(message:types.Message, state:FSMContext):
     await state.update_data(field=field)
     await message.answer("Enter new value")
     await state.set_state(EditCocktail.new_value)
-#new value cmd
+# Сохраняет новое значение выбранного поля коктейля.
 @edit_router.message(EditCocktail.new_value)
 async def new_value_handler(message:types.Message, state:FSMContext):
     if not message.text or message.text.isspace() or message.text.startswith("/"):

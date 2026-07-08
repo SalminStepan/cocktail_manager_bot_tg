@@ -1,3 +1,6 @@
+# Этот файл отвечает за команду /list и навигацию по списку коктейлей.
+# Он держит Telegram callback-логику отдельно от сервисов, чтобы пагинация и кнопки не попадали в слой базы.
+
 import asyncio
 
 from aiogram import Router, types
@@ -11,12 +14,14 @@ from utils.cocktail_sender import send_cocktail_card
 
 list_router = Router()
 
+# Собирает заголовок страницы списка коктейлей.
 def build_cocktail_list_text(cocktails, page: int) -> str:
     return (
         f"🍸 Cocktails — Page {page}\n\n"
         f"Choose a cocktail:"
     )
 
+# Обрабатывает /list и показывает страницу коктейлей с кнопками.
 @list_router.message(Command("list"))
 async def list_handler(message:types.Message):
     parse_msg = message.text.split()
@@ -49,6 +54,7 @@ async def list_handler(message:types.Message):
         reply_markup=get_cocktail_list_keyboard(cocktails, page),
     )
 
+# Переключает страницы списка по inline-кнопкам.
 @list_router.callback_query(lambda callback: callback.data and callback.data.startswith("list:"))
 async def list_callback_handler(callback: types.CallbackQuery):
     page = int(callback.data.split(":")[1])
@@ -74,6 +80,7 @@ async def list_callback_handler(callback: types.CallbackQuery):
         )
     await callback.answer()
 
+# Открывает карточку коктейля из кнопки списка.
 @list_router.callback_query(lambda callback:callback.data and callback.data.startswith('cocktail:'))
 async def cocktail_from_key_handler(callback: types.CallbackQuery):
     try:
@@ -103,6 +110,7 @@ async def cocktail_from_key_handler(callback: types.CallbackQuery):
         
     await callback.answer()
 
+# Отвечает на неактивную кнопку текущей страницы.
 @list_router.callback_query(lambda callback: callback.data == "noop")
 async def noop_callback_handler(callback: types.CallbackQuery):
     await callback.answer("Already here")

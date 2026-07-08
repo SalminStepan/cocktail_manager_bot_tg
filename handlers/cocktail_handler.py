@@ -1,3 +1,6 @@
+# Этот файл обрабатывает команду /cocktail для просмотра рецепта по точному названию.
+# Он связывает Telegram-команду с сервисным слоем, форматтером карточки и отправкой текста или фото.
+
 from aiogram import Router, types
 from aiogram.filters.command import Command
 
@@ -8,6 +11,7 @@ from utils.cocktail_sender import send_cocktail_card
 
 get_cocktail_router = Router()
 
+# Обрабатывает /cocktail и отправляет найденную карточку рецепта.
 @get_cocktail_router.message(Command("cocktail"))
 async def cocktail_handler(message:types.Message):
     parse_msg = message.text.split()

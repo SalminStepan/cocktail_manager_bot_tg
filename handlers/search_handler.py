@@ -38,74 +38,44 @@ async def search_handler(message:types.Message):
 
     cocktails = await asyncio.to_thread(search_by_query, query, page)
 
-    if cocktails:
-        event_type="search"
-        telegram_user_id=message.from_user.id
-        chat_id=message.chat.id
-        chat_type=message.chat.type
-        command="/search"
-        callback_type=None
-        query=query
-        cocktail_id=None
-        cocktail_name=None
-        status="ok"
-        duration_ms=None
-        error_type=None
-        error_message=None
-        metadata={"results_count": len(cocktails), "page":page}
-    else:
-        event_type="search"
-        telegram_user_id=message.from_user.id
-        chat_id=message.chat.id
-        chat_type=message.chat.type
-        command="/search"
-        callback_type=None
-        query=query
-        cocktail_id=None
-        cocktail_name=None
-        status="not_found"
-        duration_ms=None
-        error_type=None
-        error_message=None
-        metadata={"results_count": 0, "page": page}
 
     if not cocktails:
-        await asyncio.to_thread(
-            log_bot_event,
-            event_type=event_type,
-            telegram_user_id=telegram_user_id,
-            chat_id=chat_id,
-            chat_type=chat_type,
-            command=command,
-            callback_type=callback_type,
-            query=query,
-            cocktail_id=cocktail_id,
-            cocktail_name=cocktail_name,
-            status=status,
-            duration_ms=duration_ms,
-            error_type=error_type,
-            error_message=error_message,
-            metadata=metadata
-        )
-        return await message.answer("Nothing found")
+        event_payload = {
+            "event_type": "search",
+            "telegram_user_id": message.from_user.id,
+            "chat_id": message.chat.id,
+            "chat_type": message.chat.type,
+            "command": "/search",
+            "callback_type": None,
+            "query": query,
+            "cocktail_id": None,
+            "cocktail_name": None,
+            "status": "not_found",
+            "duration_ms": None,
+            "error_type": None,
+            "error_message": None,
+            "metadata": {"results_count": 0, "page": page}
+        }
 
-    await asyncio.to_thread(
-        log_bot_event,
-        event_type=event_type,
-        telegram_user_id=telegram_user_id,
-        chat_id=chat_id,
-        chat_type=chat_type,
-        command=command,
-        callback_type=callback_type,
-        query=query,
-        cocktail_id=cocktail_id,
-        cocktail_name=cocktail_name,
-        status=status,
-        duration_ms=duration_ms,
-        error_type=error_type,
-        error_message=error_message,
-        metadata=metadata
-    )
+        await asyncio.to_thread(log_bot_event, **event_payload)
+        return await message.answer("Nothing found")
+    event_payload = {
+        "event_type": "search",
+        "telegram_user_id": message.from_user.id,
+        "chat_id": message.chat.id,
+        "chat_type": message.chat.type,
+        "command": "/search",
+        "callback_type": None,
+        "query": query,
+        "cocktail_id": None,
+        "cocktail_name": None,
+        "status": "ok",
+        "duration_ms": None,
+        "error_type": None,
+        "error_message": None,
+        "metadata": {"results_count": len(cocktails), "page":page}
+        }
+    await asyncio.to_thread(log_bot_event,**event_payload)
 
     text = build_cocktail_search_text(page, query)
 
@@ -122,10 +92,46 @@ async def search_callback_handler(callback: types.CallbackQuery):
     query = str(callback.data.split(":")[-1])
 
     cocktails = await asyncio.to_thread(search_by_query, query, page)
-
+    
     if not cocktails:
+        event_payload = {
+            "event_type": "pagination",
+            "telegram_user_id": callback.from_user.id,
+            "chat_id": callback.message.chat.id,
+            "chat_type": callback.message.chat.type,
+            "command": None,
+            "callback_type": "search_page",
+            "query": query,
+            "cocktail_id": None,
+            "cocktail_name": None,
+            "status": "empty_page",
+            "duration_ms": None,
+            "error_type": None,
+            "error_message": None,
+            "metadata": {"results_count": 0, "page": page}
+        }
+
+        await asyncio.to_thread(log_bot_event, **event_payload)
         await callback.answer("No more cocktails")
         return
+    
+    event_payload= {
+        "event_type": "pagination",
+        "telegram_user_id": callback.from_user.id,
+        "chat_id": callback.message.chat.id,
+        "chat_type": callback.message.chat.type,
+        "command": None,
+        "callback_type": "search_page",
+        "query": query,
+        "cocktail_id": None,
+        "cocktail_name": None,
+        "status": "ok",
+        "duration_ms": None,
+        "error_type": None,
+        "error_message": None,
+        "metadata": {"results_count": len(cocktails), "page":page}
+    }
+    await asyncio.to_thread(log_bot_event, **event_payload)
 
     text = build_cocktail_search_text(page, query)
 
@@ -157,8 +163,43 @@ async def search_cocktail_from_key_handler(callback: types.CallbackQuery):
     cocktail = await asyncio.to_thread(get_full_cocktail_by_id, cocktail_id)
 
     if not cocktail:
+        event_payload = {
+            "event_type": "cocktail_view",
+            "telegram_user_id": callback.from_user.id,
+            "chat_id": callback.message.chat.id,
+            "chat_type": callback.message.chat.type,
+            "command": None,
+            "callback_type": "search_detail",
+            "query": query,
+            "cocktail_id": cocktail_id,
+            "cocktail_name": None,
+            "status": "not_found",
+            "duration_ms": None,
+            "error_type": None,
+            "error_message": None,
+            "metadata": {"page": page},
+        }
+        await asyncio.to_thread(log_bot_event, **event_payload)
         await callback.answer("Cocktail not found")
         return
+
+    event_payload = {
+        "event_type": "cocktail_view",
+        "telegram_user_id": callback.from_user.id,
+        "chat_id": callback.message.chat.id,
+        "chat_type": callback.message.chat.type,
+        "command": None,
+        "callback_type": "search_detail",
+        "query": query,
+        "cocktail_id": cocktail_id,
+        "cocktail_name": cocktail.name,
+        "status": "ok",
+        "duration_ms": None,
+        "error_type": None,
+        "error_message": None,
+        "metadata": {"page":page}
+    }
+    await asyncio.to_thread(log_bot_event, **event_payload)
 
     text = format_cocktail_text(cocktail)
 

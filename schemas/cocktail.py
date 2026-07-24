@@ -26,4 +26,4 @@ class CocktailRead(BaseModel):
     parse_status: str
     source_url: str | None
     ingredients: list[IngredientRead]
-    created_at: datetime | None
+    created_at: datetime | None = None

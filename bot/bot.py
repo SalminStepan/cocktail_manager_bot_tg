@@ -7,7 +7,11 @@ import logging
 from aiogram import Bot, Dispatcher
 from aiogram.types import BotCommand
 
-from config import BOT_TOKEN
+from config import (
+    BOT_TOKEN,
+    COCKTAIL_API_BASE_URL,
+    COCKTAIL_API_TIMEOUT,
+)
 from handlers.start_handler import start_router
 from handlers.list_handler import list_router
 from handlers.cocktail_handler import get_cocktail_router
@@ -17,6 +21,7 @@ from handlers.help_handler import help_router
 # from handlers.delete_handler import delete_router
 # from handlers.edit_handler import edit_router
 # from handlers.edit_ingredient_handler import edit_ingredients_router
+from clients.cocktail_api_client import CocktailApiClient
 
 
 logging.basicConfig(
@@ -48,6 +53,11 @@ async def main():
 
     bot = Bot(token=BOT_TOKEN)
     dp = Dispatcher()
+
+    api_client = CocktailApiClient(
+         base_url=COCKTAIL_API_BASE_URL,
+         timeout=COCKTAIL_API_TIMEOUT,
+    )
     
     dp.include_router(start_router)
     dp.include_router(list_router)
@@ -61,8 +71,12 @@ async def main():
 
     try:
         await set_commands(bot)
-        await dp.start_polling(bot)
+        await dp.start_polling(
+            bot,
+            api_client=api_client,
+        )
     finally:
+        await api_client.close()
         await bot.session.close()
         logger.info("Cocktail Manager Bot stopped")
 

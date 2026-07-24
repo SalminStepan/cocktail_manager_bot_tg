@@ -7,10 +7,11 @@ from aiogram import Router, types
 from aiogram.filters.command import Command
 from services.cocktail_services import list_cocktails
 from utils.keyboards import get_cocktail_list_keyboard, back_to_list_keyboard
-from services.cocktail_services import get_full_cocktail_by_id
+
 from utils.cocktail_formatter import format_cocktail_text
 from utils.cocktail_sender import send_cocktail_card
 from services.analytics_service import log_bot_event
+from clients.cocktail_api_client import CocktailApiClient
 
 
 list_router = Router()
@@ -159,7 +160,9 @@ async def list_callback_handler(callback: types.CallbackQuery):
 
 # Открывает карточку коктейля из кнопки списка.
 @list_router.callback_query(lambda callback:callback.data and callback.data.startswith('cocktail:'))
-async def cocktail_from_key_handler(callback: types.CallbackQuery):
+async def cocktail_from_key_handler(
+    callback: types.CallbackQuery,
+    api_client: CocktailApiClient):
     try:
         parts = callback.data.split(':')
         cocktail_id = int(parts[1])
@@ -168,8 +171,8 @@ async def cocktail_from_key_handler(callback: types.CallbackQuery):
         await callback.answer("Invalid callback data")
         return
     
-    cocktail = await asyncio.to_thread(get_full_cocktail_by_id, cocktail_id)
-
+    cocktail = await api_client.get_cocktail_by_id(cocktail_id)
+    
     if cocktail:
         event_payload = {
             "event_type": "cocktail_view",

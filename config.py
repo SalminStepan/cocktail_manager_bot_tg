@@ -20,3 +20,12 @@ else:
     parts = raw_admin_ids.split(",")
     cleaned_parts = [x.strip() for x in parts]
     ADMIN_IDS = set(int(x) for x in cleaned_parts if x)
+
+COCKTAIL_API_BASE_URL = os.getenv(
+    "COCKTAIL_API_BASE_URL",
+    "http://127.0.0.1:8000",
+).rstrip("/")
+
+COCKTAIL_API_TIMEOUT = float(
+    os.getenv("COCKTAIL_API_TIMEOUT", "5.0")
+)
